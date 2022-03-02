@@ -1,0 +1,63 @@
+<section id="category-details">
+    <div class="card">
+        <div class="card-details text-center">
+            <h3 class="text-center">تفاصيل الطلب رقم {{orderDetailsObj?.id}}</h3> 
+            <table class="table" dir="rtl">
+                <thead style="text-align: right;">المنتجات</thead>
+                <tbody *ngFor="let orderItem of orderDetailsObj?.order_items; let i = index;">
+                    <tr style="text-align: right;">*منتج رقم {{ i + 1 }}</tr>
+                    <tr>
+                        <th scope="row">أسم المنتج</th>
+                        <td><span>{{ orderItem?.shop_product?.name_ar }}</span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">سعر المنتج بعد الخصم</th>
+                        <td>{{ orderItem?.shop_product?.price_after_discount }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">كمية المنتج</th>
+                        <td>{{ orderItem?.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">صورة المنتج</th>
+                        <td><img style="width: 150px;" [src]="orderItem?.shop_product?.imagePath"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table" dir="rtl">
+                <thead>تفاصيل العميل</thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">اسم العميل</th>
+                        <td>{{ orderDetailsObj?.user?.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">رقم الهاتف</th>
+                        <td>{{ orderDetailsObj?.user?.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">أيميل العميل</th>
+                        <td>{{ orderDetailsObj?.user?.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">عنوان العميل</th>
+                        <td>{{ orderDetailsObj?.user?.default_address }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">صورة حساب العميل</th>
+                        <td><img style="width: 60px;border-radius: 50%;" [src]="orderDetailsObj?.user?.imagePath"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <button class="btn btn-danger mt-3 mb-3" (click)="closeCard()">حسناً</button> -->
+            <!-- <div class="row">
+                <div class="col-md-3" *ngFor="let image of data.images">
+                    <img class="w-100" src="{{image}}" alt="" >
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+</section>
+
+
