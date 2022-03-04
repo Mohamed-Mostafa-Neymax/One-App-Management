@@ -25,14 +25,14 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit(){
     this.spinner.show();
-    this.globalService.addCategory(this.categoryForm.value).subscribe( res => {
-    this.spinner.hide()
-    Swal.fire(
-        'نجاح',
-        'تم إضافة الفئة بنجاح',
-        'success'
-    )
-    })
+    // this.globalService.addCategory(this.categoryForm.value).subscribe( res => {
+    // this.spinner.hide()
+    //   Swal.fire(
+    //       'نجاح',
+    //       'تم إضافة الفئة بنجاح',
+    //       'success'
+    //   )
+    // })
   }
 
 }

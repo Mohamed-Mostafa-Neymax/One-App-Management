@@ -51,20 +51,20 @@ export class DeliveryDetailsComponent implements OnInit {
     if( this.files.length > 0 ) {
       const formDate = new FormData();
       formDate.append('files[0]', this.files[0]);
-      this.globalService.uploadImage(formDate).subscribe( res => {
-        this.formAfterEdit = {
-          ...this.editForm.value,
-          shop_product_id: this.data.id,
-          price_after_discount: this.priceAfterDiscount,
-          has_options: this.data.has_options,
-          image: res['files'][0]
-        }
-        this.globalService.editProduct(this.formAfterEdit).subscribe( updatedProduct => {
-          this.spinner.hide();
-          this.dialog.closeAll()
-          console.log(updatedProduct);
-        });
-      });
+      // this.globalService.uploadImage(formDate).subscribe( res => {
+      //   this.formAfterEdit = {
+      //     ...this.editForm.value,
+      //     shop_product_id: this.data.id,
+      //     price_after_discount: this.priceAfterDiscount,
+      //     has_options: this.data.has_options,
+      //     image: res['files'][0]
+      //   }
+      //   this.globalService.editProduct(this.formAfterEdit).subscribe( updatedProduct => {
+      //     this.spinner.hide();
+      //     this.dialog.closeAll()
+      //     console.log(updatedProduct);
+      //   });
+      // });
     } else {
       this.formAfterEdit = {
         ...this.editForm.value,
@@ -73,11 +73,11 @@ export class DeliveryDetailsComponent implements OnInit {
         has_options: this.data.has_options,
         image: this.data.imagePath
       }
-      this.globalService.editProduct(this.formAfterEdit).subscribe( updatedProduct => {
-        this.spinner.hide();
-        this.dialog.closeAll()
-        console.log(updatedProduct);
-      });
+      // this.globalService.editProduct(this.formAfterEdit).subscribe( updatedProduct => {
+      //   this.spinner.hide();
+      //   this.dialog.closeAll()
+      //   console.log(updatedProduct);
+      // });
     }
     console.log(this.formAfterEdit);
   }

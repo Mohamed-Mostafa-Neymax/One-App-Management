@@ -1,3 +1,4 @@
+
 import { countryRoutingModule } from './components/countries/country-routing.module';
 import { UsersModule } from './components/users/users.module';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,11 @@ import { NotificationModule } from './components/notification/notification.modul
 import { ProductModule } from './components/products/product.module';
 import { SubCategoryModule } from './components/sub-categories/sub-category.module';
 import { CityRoutingModule } from './components/cities/city-routing.module';
+import { FilterModule } from './components/filter/filter.module';
+import { TagsModule } from './components/tags/tags.module';
+import { ShopsModule } from './components/shops/shops.module';
+import { DeliveryCompaniesModule } from './components/delivery-companies/delivery-companies.module';
+import { VouchersModule } from './components/vouchers/vouchers.module';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -36,18 +42,23 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     component: DashboardLayoutComponent,
     children: [
-      {path:'categories',loadChildren:()=>CategoryModule},
-      {path:'sub-categories',loadChildren:()=>SubCategoryModule},
-      {path:'country',loadChildren:()=>countryRoutingModule},
-      {path:'city',loadChildren:()=>CityRoutingModule},
+      { path: 'categories', loadChildren: () => CategoryModule },
+      { path: 'sub-categories', loadChildren: () => SubCategoryModule },
+      { path: 'country', loadChildren: () => countryRoutingModule },
+      { path: 'city', loadChildren: () => CityRoutingModule },
+      { path: 'filter', loadChildren: () => FilterModule },
+      { path: 'tags', loadChildren: () => TagsModule },
+      { path: 'shops', loadChildren: () => ShopsModule },
+      { path: 'delivery-companies', loadChildren: () => DeliveryCompaniesModule },
+      { path: 'vouchers', loadChildren: () => VouchersModule },
+      { path: 'services', loadChildren: () => ServicesModule },
+
       {path:'users',loadChildren:()=>UsersModule},
       {path:'orders',loadChildren:()=>OrdersModule},
-      {path:'services',loadChildren:()=>ServicesModule},
       {path:'delivery',loadChildren:()=>DeliversModule},
       {path:'reports',loadChildren:()=>ReportsModule},
       {path:'product',loadChildren:()=>ProductModule},
-      {path:'notification',loadChildren:()=>NotificationModule},
-      
+      {path:'notification',loadChildren:()=>NotificationModule}
     ]
   },
   {

@@ -34,8 +34,8 @@ export class AddExcelComponent implements OnInit {
 
   
     
-    this.service.updateExcelFile(this.files[0]).subscribe(res=>{
-      console.log(res)
-    })
+    // this.service.updateExcelFile(this.files[0]).subscribe(res=>{
+    //   console.log(res)
+    // })
   }
 }

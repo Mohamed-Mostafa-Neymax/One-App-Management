@@ -80,11 +80,11 @@ export class ProfileComponent implements OnInit {
     this.files.push(...event.addedFiles);
     const formData = new FormData();
       formData.append("files[0]", this.files[0]);
-    this.globalService.uploadImage(formData).subscribe( imgStringRes => {
-      console.log(imgStringRes);
-      this.imagesObj['image'] = imgStringRes['files'][0];
-      console.log(this.imagesObj);
-    });
+    // this.globalService.uploadImage(formData).subscribe( imgStringRes => {
+    //   console.log(imgStringRes);
+    //   this.imagesObj['image'] = imgStringRes['files'][0];
+    //   console.log(this.imagesObj);
+    // });
   }
   onRemove(event) {
     console.log(event);
@@ -98,11 +98,11 @@ export class ProfileComponent implements OnInit {
     this.filesCover.push(...event.addedFiles);
     const formData = new FormData();
       formData.append("files[0]", this.filesCover[0]);
-      this.globalService.uploadImage(formData).subscribe( imgStringRes => {
-        console.log(imgStringRes);
-        this.imagesObj['cover_image'] = imgStringRes['files'][0];
-        console.log(this.imagesObj);
-      });
+      // this.globalService.uploadImage(formData).subscribe( imgStringRes => {
+      //   console.log(imgStringRes);
+      //   this.imagesObj['cover_image'] = imgStringRes['files'][0];
+      //   console.log(this.imagesObj);
+      // });
   }
   onRemoveCover(event) {
     console.log(event);
@@ -127,15 +127,15 @@ export class ProfileComponent implements OnInit {
     console.log('imagesObj', this.imagesObj);
     console.log('overallObjforRequest', {...this.overallObjforRequest, ...this.imagesObj});
     
-    this.globalService.editProfile({...this.overallObjforRequest, ...this.imagesObj}).subscribe( editProfilesRes => {
-      console.log('editProfilesRes', editProfilesRes);
-      localStorage.setItem(`updatedProfile`, JSON.stringify(editProfilesRes));
-      this.userUpdatedProfile = localStorage.getItem(`updatedProfile`);
-      if( this.userUpdatedProfile ) {
-        this.userUpdatedProfile = JSON.parse(this.userUpdatedProfile);
-        console.log(this.userUpdatedProfile);
-      }
-    });
+    // this.globalService.editProfile({...this.overallObjforRequest, ...this.imagesObj}).subscribe( editProfilesRes => {
+    //   console.log('editProfilesRes', editProfilesRes);
+    //   localStorage.setItem(`updatedProfile`, JSON.stringify(editProfilesRes));
+    //   this.userUpdatedProfile = localStorage.getItem(`updatedProfile`);
+    //   if( this.userUpdatedProfile ) {
+    //     this.userUpdatedProfile = JSON.parse(this.userUpdatedProfile);
+    //     console.log(this.userUpdatedProfile);
+    //   }
+    // });
     
 
     

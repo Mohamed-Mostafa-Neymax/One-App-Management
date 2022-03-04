@@ -13459,7 +13459,7 @@ p.data-attributes svg {
   display: block; }
 
 .user-status table tbody tr td {
-  vertical-align: middle; }
+  vertical-align: middle; text-align: center;}
   .user-status table tbody tr td .d-inline-block {
     margin-top: 11px; }
   .user-status table tbody tr td .image-sm-size img {
@@ -13473,7 +13473,8 @@ p.data-attributes svg {
   font-size: 16px;
   color: #2c323f;
   font-weight: 600;
-  padding-top: 0; }
+  /* padding-top: 0; */
+}
 
 @-webkit-keyframes am-moving-dashes {
   100% {

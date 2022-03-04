@@ -31,10 +31,10 @@ export class ListComponent implements OnInit {
   }
 
   categoryList() {
-    this.globalService.allCategories().subscribe( categories => {
-      console.log(categories['data']);
-      this.categories = categories['data'];
-    });
+    // this.globalService.allCategories().subscribe( categories => {
+    //   console.log(categories['data']);
+    //   this.categories = categories['data'];
+    // });
   }
 
   // onShowDetails(cat) {

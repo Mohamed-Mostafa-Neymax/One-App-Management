@@ -17,11 +17,11 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
-    this.globalService.showOrderBy_id(this.data.id).subscribe( orderDetail => {
-      console.log(orderDetail);
-      this.orderDetailsObj = orderDetail['data'];
-      this.createdOrderDate = new Date(this.orderDetailsObj?.created_at);
-    });
+    // this.globalService.showOrderBy_id(this.data.id).subscribe( orderDetail => {
+    //   console.log(orderDetail);
+    //   this.orderDetailsObj = orderDetail['data'];
+    //   this.createdOrderDate = new Date(this.orderDetailsObj?.created_at);
+    // });
   }
 
 }

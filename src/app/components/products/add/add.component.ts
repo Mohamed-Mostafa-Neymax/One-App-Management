@@ -30,10 +30,10 @@ export class AddComponent implements OnInit {
   constructor(private toastr: ToastrService ,private globalService: GlobalService, private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.globalService.allCategories().subscribe( categoriesRes => {
-      console.log('allCategories', categoriesRes);
-      this.categoriesList = categoriesRes['data'];
-    });
+    // this.globalService.allCategories().subscribe( categoriesRes => {
+    //   console.log('allCategories', categoriesRes);
+    //   this.categoriesList = categoriesRes['data'];
+    // });
 
     this.options_type_List = [{programaticValue: 1, showedValue: 'أختيار واحد'}, {programaticValue: 2, showedValue: 'عدة أختيارات'}];
     this.options_Price_type_List = [{programaticValue: 0, showedValue: 'مجاني'}, {programaticValue: 1, showedValue: 'له سعر'}];
@@ -187,11 +187,11 @@ export class AddComponent implements OnInit {
     this.files.push(...event.addedFiles);
     const formData = new FormData();
     formData.append("files[0]", this.files[0]);
-    this.globalService.uploadImage(formData).subscribe( imgStringRes => {
-      console.log(imgStringRes);
-      this.imagesObj['image'] = imgStringRes['files'][0];
-      console.log(this.imagesObj);
-    });
+    // this.globalService.uploadImage(formData).subscribe( imgStringRes => {
+    //   console.log(imgStringRes);
+    //   this.imagesObj['image'] = imgStringRes['files'][0];
+    //   console.log(this.imagesObj);
+    // });
   }
 
   onRemove(event) {
@@ -297,26 +297,26 @@ export class AddComponent implements OnInit {
     
     if( arrOfFiles.length > 0 ) {
       this.spinner.show();
-      this.globalService.addProduct({...basicData, ...this.imagesObj}, arrOfFiles).subscribe( addProductRes => {
-        this.spinner.hide();
-        Swal.fire(
-          'نجاح',
-          'تم أضافة المنتج بنجاح',
-          'success'
-        )
-        console.log(addProductRes);
-      });
+      // this.globalService.addProduct({...basicData, ...this.imagesObj}, arrOfFiles).subscribe( addProductRes => {
+      //   this.spinner.hide();
+      //   Swal.fire(
+      //     'نجاح',
+      //     'تم أضافة المنتج بنجاح',
+      //     'success'
+      //   )
+      //   console.log(addProductRes);
+      // });
     } else {
       this.spinner.show();
-      this.globalService.addProduct({...basicData, ...this.imagesObj}).subscribe( addProductRes => {
-        this.spinner.hide();
-        Swal.fire(
-          'نجاح',
-          'تم أضافة المنتج بنجاح',
-          'success'
-        )
-        console.log(addProductRes);
-      });
+      // this.globalService.addProduct({...basicData, ...this.imagesObj}).subscribe( addProductRes => {
+      //   this.spinner.hide();
+      //   Swal.fire(
+      //     'نجاح',
+      //     'تم أضافة المنتج بنجاح',
+      //     'success'
+      //   )
+      //   console.log(addProductRes);
+      // });
     }
   }
 }

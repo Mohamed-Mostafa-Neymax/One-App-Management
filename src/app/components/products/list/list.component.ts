@@ -22,26 +22,26 @@ products
   }
  
   productList(){
-    this.service.getProducts().pipe(map(res=>res['data'])).subscribe(res=>{
-      this.products = res;
-      console.log(res);
-      this.dialog.closeAll();
-    })
+    // this.service.getProducts().pipe(map(res=>res['data'])).subscribe(res=>{
+    //   this.products = res;
+    //   console.log(res);
+    //   this.dialog.closeAll();
+    // })
   }
 
 
 
   deleteProduct(prod_id){
     this.spinner.show();
-    this.service.deleteProduct(prod_id).subscribe( res =>{
-      this.spinner.hide();
-      Swal.fire(
-        'نجاح',
-        'تم حذف المنتج بنجاح',
-        'success'
-      )
-      this.productList();
-    })
+    // this.service.deleteProduct(prod_id).subscribe( res =>{
+    //   this.spinner.hide();
+    //   Swal.fire(
+    //     'نجاح',
+    //     'تم حذف المنتج بنجاح',
+    //     'success'
+    //   )
+    //   this.productList();
+    // })
   }
 
 

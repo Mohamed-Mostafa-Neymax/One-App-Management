@@ -1,0 +1,27 @@
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update" >
+            <div class="col-md-12">
+                <div class="card-body">
+                    <form [formGroup]="removeTagForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group col-12">
+                            <label for="">أختر علامة</label>
+                            <ng-multiselect-dropdown [settings]="tagSettings" [data]="tagList" [formControlName]="'home_tag_id'"
+                            (onSelect)="onSelectFilter($event)" (onSelectAll)="onSelectAllFilters($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="">أختر متجر</label>
+                            <ng-multiselect-dropdown [settings]="shopSettings" [data]="shopList" [formControlName]="'shop_id'"
+                                (onSelect)="onSelectShop($event)" (onSelectAll)="onSelectAllShops($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit" [disabled]="removeTagForm.invalid">أضافة تصفية إلي متجر</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

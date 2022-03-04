@@ -1,0 +1,62 @@
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update" >
+            <div class="col-md-12">
+                <div class="card-body">
+                    <form [formGroup]="AddShopForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>أسم المتجر باللغة العربية</mat-label>
+                            <input matInput type="text" [formControlName]="'name_ar'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>أسم المتجر باللغة الأنجليزية</mat-label>
+                            <input matInput type="text" [formControlName]="'name_en'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>وصف المتجر باللغة الأنجليزية</mat-label>
+                            <input matInput type="text" [formControlName]="'description_ar'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>وصف المتجر باللغة الأنجليزية</mat-label>
+                            <input matInput type="text" [formControlName]="'description_en'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>حساب المتجر</mat-label>
+                            <input matInput type="text" [formControlName]="'email'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>الرقم السري</mat-label>
+                            <input matInput type="text" [formControlName]="'password'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>تأكيد الرقم السري</mat-label>
+                            <input matInput type="text" [formControlName]="'confirm_password'">
+                        </mat-form-field>
+                        <hr>
+                        <p>image</p>
+                        <hr>
+                        <p>cover_image</p>
+                        <hr>
+                        <div id="mapId" style="width: 100%; height: 300px;"></div>
+                        <hr>
+                        <p>shop_categories[0]</p>
+                        <hr>
+                        <p>shop_subcategories[0]</p>
+                        <hr>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>مدة الشحن</mat-label>
+                            <input matInput type="text" [formControlName]="'delivery_period'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>رقم الهاتف</mat-label>
+                            <input matInput type="text" [formControlName]="'phone'">
+                        </mat-form-field>
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit" [disabled]="AddShopForm.invalid">أضافة تصفية</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

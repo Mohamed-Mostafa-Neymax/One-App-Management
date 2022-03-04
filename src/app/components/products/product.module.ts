@@ -25,7 +25,8 @@ import { AddExcelComponent } from './add-excel/add-excel.component';
     FormsModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatFormFieldModule,MatInputModule,
+    MatFormFieldModule,
+    MatInputModule,
     NgMultiSelectDropDownModule.forRoot(),
   ]
 })

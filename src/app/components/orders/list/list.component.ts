@@ -23,17 +23,17 @@ export class ListComponent implements OnInit {
   onShowOrder_Req(status_id: number, ship_id?: number) {
     this.spinner.show();
     if( !ship_id ) {
-      this.globalService.showOrdersBy_Status_id(status_id).subscribe( ordersRes => {
-        this.spinner.hide();
-        console.log('ordersRes', ordersRes);
-        this.ordersArr = ordersRes['data'];
-      });
+      // this.globalService.showOrdersBy_Status_id(status_id).subscribe( ordersRes => {
+      //   this.spinner.hide();
+      //   console.log('ordersRes', ordersRes);
+      //   this.ordersArr = ordersRes['data'];
+      // });
     } else {
-      this.globalService.showOrdersBy_Status_id(status_id).subscribe( ordersResFlter => {
-        this.spinner.hide();
-        console.log('ordersResFlter', ordersResFlter);
-        this.ordersArr = ordersResFlter['data'].filter( val => val?.shipment_step_id == ship_id );
-      });
+      // this.globalService.showOrdersBy_Status_id(status_id).subscribe( ordersResFlter => {
+      //   this.spinner.hide();
+      //   console.log('ordersResFlter', ordersResFlter);
+      //   this.ordersArr = ordersResFlter['data'].filter( val => val?.shipment_step_id == ship_id );
+      // });
     }
   }
   
@@ -58,17 +58,15 @@ export class ListComponent implements OnInit {
 
   onUpdateOrder(order_id: number, shipment_id: number) {
     this.spinner.show();
-    this.globalService.updateOrderStatus({shop_order_id: order_id, shipment_step_id: shipment_id}).subscribe(updateRes => {
-      console.log(updateRes);
-      // this.onShowOrder_Req(this.currectStatus_id, shipment_id);
-      // this.onFilter(this.currectFilterType, this.currectStatus_id, shipment_id);
-      this.spinner.hide();
-        Swal.fire(
-          'نجاح',
-          'تم نقل الطلب بنجاح',
-          'success'
-        )
-    });
+    // this.globalService.updateOrderStatus({shop_order_id: order_id, shipment_step_id: shipment_id}).subscribe(updateRes => {
+    //   console.log(updateRes);
+    //   this.spinner.hide();
+    //     Swal.fire(
+    //       'نجاح',
+    //       'تم نقل الطلب بنجاح',
+    //       'success'
+    //     )
+    // });
   }
 
 
