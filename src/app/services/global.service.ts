@@ -25,10 +25,42 @@ export class GlobalService {
   listTags() { return this.http.get(`${environment.endpoint}/user/hometags/all`); }
   
   // Shops Requests
-  addShop(shopObj) { return this.http.post(`${environment.endpoint}/admin/shop/register`, shopObj); }
+  addShop(shopObj) {
+    const formData = new FormData();
+    for( let key in shopObj ) {
+      if( key == 'shop_categories' ) {
+        for( let c = 0; c < shopObj['shop_categories'].length; c++ ) {
+          formData.append('shop_categories['+c+']', shopObj['shop_categories'][c].id);
+        }
+      } else if( key == 'shop_subcategories' ) {
+        for( let c = 0; c < shopObj['shop_subcategories'].length; c++ ) {
+          formData.append('shop_subcategories['+c+']', shopObj['shop_subcategories'][c].id);
+        }
+      } else {
+        formData.append(key, shopObj[key]);
+      }
+    }
+    return this.http.post(`${environment.endpoint}/admin/shop/register`, formData);
+  }
   deleteShop(shop_id_Obj) { return this.http.delete(`${environment.endpoint}/admin/shop/delete?shop_id=${shop_id_Obj}`); }
   listShops() { return this.http.get(`${environment.endpoint}/admin/shops/all`); }
   
+  // Categories
+  listCategories(filter_type) { return this.http.get(`${environment.endpoint}/user/categories/all?type=${filter_type}`); }
+  listSubCategories(category_id) { return this.http.get(`${environment.endpoint}/user/subcategories/all?category_ids[0]=${category_id}`); }
+
+  // Delivery Companies Requests
+  addDeliveryCompany(Company_obj) { return this.http.post(`${environment.endpoint}/admin/delivery/company/register`, Company_obj); }
+  deleteDeliveryCompanies(id) { return this.http.delete(`${environment.endpoint}/admin/delivery/company/delete?delivery_company_id=${id}`); }
+  listDeliveryCompanies() { return this.http.get(`${environment.endpoint}/admin/delivery/company/all`); }
+
+  // Vouchers
+  addVoucher(voucher_obj) { return this.http.post(`${environment.endpoint}/admin/voucher/create`, voucher_obj); }
+  editVoucher(voucher_obj) { return this.http.post(`${environment.endpoint}/admin/voucher/edit`, voucher_obj); }
+  deleteVoucher(id) { return this.http.delete(`${environment.endpoint}/admin/voucher/delete?voucher_id=${id}`); }
+  listVouchers() { return this.http.get(`${environment.endpoint}/admin/vouchers/all`); }
+
+
   // Category
   // allCategories(){
   //   return this.http.get(`${environment.endpoint}/shop/categories/all`);
@@ -43,9 +75,9 @@ export class GlobalService {
   //   return this.http.delete(`${environment.endpoint}/admin/category/delete?category_id=${category_id}`)
   // }
   
-  // uploadImage(f){
-  //   return this.http.post(`${environment.endpoint}/user/files/add`, f);
-  // }
+  uploadImage(f){
+    return this.http.post(`${environment.endpoint}/user/files/add`, f);
+  }
 
   // // Products Requests
   // getProducts() { return this.http.get(`${environment.endpoint}/shop/products/all`); }

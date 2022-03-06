@@ -13,7 +13,7 @@
                             <input matInput type="text" [formControlName]="'name_en'">
                         </mat-form-field>
                         <mat-form-field class="w-100" appearance="outline">
-                            <mat-label>وصف المتجر باللغة الأنجليزية</mat-label>
+                            <mat-label>وصف المتجر باللغة العربية</mat-label>
                             <input matInput type="text" [formControlName]="'description_ar'">
                         </mat-form-field>
                         <mat-form-field class="w-100" appearance="outline">
@@ -32,27 +32,58 @@
                             <mat-label>تأكيد الرقم السري</mat-label>
                             <input matInput type="text" [formControlName]="'confirm_password'">
                         </mat-form-field>
-                        <hr>
-                        <p>image</p>
-                        <hr>
-                        <p>cover_image</p>
+                        <div class="form-group">
+                            <label for="">صورة المتجر</label>
+                            <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif" [multiple]="false">
+                                <ngx-dropzone-label>أضغط هنا لإختيار صورة للمتجر</ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f" >
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+                        <div class="form-group">
+                            <label for="">صورة غلاف المتجر</label>
+                            <ngx-dropzone (change)="onSelect_2($event)" accept="image/jpeg,image/jpg,image/png,image/gif" [multiple]="false">
+                                <ngx-dropzone-label>أضغط هنا لإختيار صورة غلاف المتجر</ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngFor="let f of files_2" [removable]="true" (removed)="onRemove_2(f)" [file]="f" >
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
                         <hr>
                         <div id="mapId" style="width: 100%; height: 300px;"></div>
                         <hr>
-                        <p>shop_categories[0]</p>
-                        <hr>
-                        <p>shop_subcategories[0]</p>
-                        <hr>
+                        <div class="form-group col-12">
+                            <label for="">تصنيف الأقسام</label>
+                            <ng-multiselect-dropdown [settings]="categories_Settings_filter" [data]="categories_List_filter" 
+                            (onSelect)="onSelect_Filter($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="">الأقسام الأساسية</label>
+                            <ng-multiselect-dropdown [settings]="categories_Settings" [data]="categories_List"
+                                [formControlName]="'shop_categories'"
+                                (onSelect)="onSelect_Category($event)" (onSelectAll)="onSelect_All_Categories($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group col-12">
+                            <label for="">الأقسام الفرعية</label>
+                            <ng-multiselect-dropdown [settings]="sub_Categories_Settings" [data]="sub_Categories_List"
+                                [formControlName]="'shop_subcategories'"
+                                (onSelect)="onSelect_Sub_Category($event)" (onSelectAll)="onSelect_All_Sub_Categories($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>مدة الشحن</mat-label>
-                            <input matInput type="text" [formControlName]="'delivery_period'">
+                            <input matInput type="text" placeholder="35-45 min" [formControlName]="'delivery_period'">
                         </mat-form-field>
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>رقم الهاتف</mat-label>
                             <input matInput type="text" [formControlName]="'phone'">
                         </mat-form-field>
                         <div class="form-group text-center mt-5">
-                            <button class="btn btn-primary" type="submit" [disabled]="AddShopForm.invalid">أضافة تصفية</button>
+                            <button class="btn btn-primary" type="submit" 
+                            [disabled]="AddShopForm.invalid || files.length < 1 || files_2.length < 1">أضافة متجر</button>
                         </div>
                     </form>
                 </div>

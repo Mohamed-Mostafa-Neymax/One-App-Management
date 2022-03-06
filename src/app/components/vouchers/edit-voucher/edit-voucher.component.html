@@ -1,1 +1,44 @@
-<p>edit-voucher works!</p>
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update" >
+            <div class="col-md-12">
+                <h3 class="text-center">تعديل الكوبون</h3>
+                <div class="card-body">
+                    <form [formGroup]="editVoucherForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>كود الكوبون</mat-label>
+                            <input matInput type="text" [formControlName]="'code'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>نسبة الخصم</mat-label>
+                            <input matInput type="text" [formControlName]="'discount'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>نوع الكوبون</mat-label>
+                            <input matInput type="text" [formControlName]="'type'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>بداية سعر للكوبون</mat-label>
+                            <input matInput type="text" [formControlName]="'min_order'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>نهاية سعر الكوبون</mat-label>
+                            <input matInput type="text" [formControlName]="'max_order'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>الوقت</mat-label>
+                            <input matInput type="time" [formControlName]="'time'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>التاريخ</mat-label>
+                            <input matInput type="date" [formControlName]="'date'">
+                        </mat-form-field>
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit" [disabled]="editVoucherForm.invalid">تعديل كوبون</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
