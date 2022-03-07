@@ -15,7 +15,6 @@ import { HomeComponent } from './components/home/home.component';
 import { WrongRouteComponent } from './components/auth/errors/wrong-route/wrong-route.component';
 import {ConnectionServiceModule} from 'ng-connection-service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ProfileComponent } from './components/profile/profile.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
@@ -24,8 +23,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     DashboardLayoutComponent,
     LoginComponent,
     HomeComponent,
-    WrongRouteComponent,
-    ProfileComponent,
+    WrongRouteComponent
   ],
   imports: [
     BrowserModule,

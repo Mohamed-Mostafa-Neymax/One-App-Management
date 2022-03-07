@@ -1,0 +1,23 @@
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update" >
+            <div class="col-md-12">
+                <div class="card-body">
+                    <form [formGroup]="addTagForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>أسم العلامة باللغة العربية</mat-label>
+                            <input matInput type="text" [formControlName]="'name_ar'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>أسم العلامة باللغة الأنجليزية</mat-label>
+                            <input matInput type="text" [formControlName]="'name_en'">
+                        </mat-form-field>
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit" [disabled]="addTagForm.invalid">أضافة علامة</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

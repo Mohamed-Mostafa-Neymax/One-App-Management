@@ -18,28 +18,54 @@ export class ListCityComponent implements OnInit {
   countries:[];
   cities:[];
   check = false ;
+
+  countries_Settings = {};
+  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+
   constructor(private dialog:MatDialog, private globalService: GlobalService , private spinner:NgxSpinnerService) { }
 
 
   ngOnInit(): void {
 
-    this.globalService.allCountries().subscribe( countries=>{
-    this.countries=countries['data'];
-      }) 
+    this.globalService.allCountries().subscribe( countries=> {
+      this.countries = countries['data'];
+    }) 
      
       this.cityForm =new FormGroup({
         'allCountries' : new FormControl(null , Validators.required),
         
       })
+
+      this.countries_Settings = {
+        singleSelection: true,
+        idField: 'id',
+        textField: 'name_ar',
+        // selectAllText: 'اختيار الكل ',
+        unSelectAllText: 'الغاء الاختيار',
+        itemsShowLimit: 10,
+        allowSearchFilter: false,
+        closeDropDownOnSelection: true
+      };
   }
   
+  // DROPDOWN CODE 1
+  onSelect_Filter(item: any) {
+    console.log('selectedFilter', item);
+    // categories_List
+    this.country_id = item.id;
+    this.globalService.getCityByCountryId(item.id).subscribe( categoriesRes => {
+      console.log('categoriesRes', categoriesRes);
+      this.cities = categoriesRes['data'];
+    });
+  }
+
+
   onCountryChange(id){
-    this.country_id = id ;
+    this.country_id = id;
     this.globalService.getCityByCountryId(this.country_id).subscribe(cities=>{
-      this.cities= cities['data']   ;
+      this.cities = cities['data'];
       this.check = true;
     });
-    // console.log(this.country_id);
   }
 
   onEditCountry(city) {

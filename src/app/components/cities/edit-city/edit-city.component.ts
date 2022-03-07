@@ -11,26 +11,46 @@ import Swal from 'sweetalert2';
   styleUrls: ['./edit-city.component.scss']
 })
 export class EditCityComponent implements OnInit {
-cityForm:FormGroup ;
-cities=[];
-country_id:number ;
-city_id :number ;
+  cityForm:FormGroup ;
+  cities = [];
+  countries = [];
+
+
+  country_id:number ;
+  city_id :number ;
+
+
+
   constructor(private dialog:MatDialog , private globalService:GlobalService, @Inject(MAT_DIALOG_DATA) public data:any, private spinner:NgxSpinnerService) { }
  
   ngOnInit(): void {
-    this.cityForm=new FormGroup({ 
-      'country_name' :new FormControl(this.data.country.name_ar , Validators.required) ,
-      'city_name':new FormControl(this.data.name_ar , Validators.required),
+
+    console.log(this.data);
+
+    this.cityForm = new FormGroup({ 
+      'country_id' :new FormControl(this.data.country_id , Validators.required),
+      'city_id':new FormControl(this.data.id , Validators.required),
       'name_en': new FormControl(this.data.name_en , Validators.required),
-      'name_ar': new FormControl(this.data.name_ar , Validators.required) ,
+      'name_ar': new FormControl(this.data.name_ar , Validators.required)
     })
-    this.globalService.getCityByCountryId(this.data.country_id).subscribe(cities=>{
-      this.cities= cities['data']   ;
+    this.globalService.allCountries().subscribe( countriesRes => {
+      this.countries = countriesRes['data'];
+    });
+    this.globalService.getCityByCountryId(this.data.country_id).subscribe( citiesRes => {
+      this.cities = citiesRes['data'];
     });
   }
+
+  onChangeCountry(eventData) {
+    console.log('eventData', eventData);
+    this.globalService.getCityByCountryId(eventData.target.value).subscribe( citiesRes => {
+      this.cities = citiesRes['data'];
+    });
+  }
+
   onSubmit(){
     this.spinner.show();
-    this.globalService.editCity({city_id:this.data.id,...this.cityForm.value , country_id: this.data.country_id }).subscribe( res=> { 
+    this.globalService.editCity(this.cityForm.value).subscribe( res => { 
     this.spinner.hide();
     Swal.fire(
         'نجاح',

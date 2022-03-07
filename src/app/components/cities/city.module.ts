@@ -5,7 +5,9 @@ import { CommonModule } from '@angular/common';
 import { CityRoutingModule } from './city-routing.module';
 import { EditCityComponent } from './edit-city/edit-city.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -13,7 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CityRoutingModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ]
 })
 export class CityModule { }

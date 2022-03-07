@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { SubCategoryRoutingModule } from './sub-category-routing.module';
 import { AddSubCategoryComponent } from './add-sub-category/add-sub-category.component';
@@ -20,7 +23,10 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ReactiveFormsModule ,
     NgxDropzoneModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ]
 })
 export class SubCategoryModule { }

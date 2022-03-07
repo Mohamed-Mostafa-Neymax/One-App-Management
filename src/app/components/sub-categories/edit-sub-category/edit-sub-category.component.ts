@@ -19,6 +19,7 @@ export class EditSubCategoryComponent implements OnInit {
   type:number ;
   check= true ; 
   componentRef: any;
+  image_edit = false;
    
   constructor(private dialog:MatDialog, private globalService:GlobalService, @Inject(MAT_DIALOG_DATA) public data:any, private spinner:NgxSpinnerService) { }
   

@@ -26,7 +26,13 @@ export class EditCategoryComponent implements OnInit {
     });
   }
   
+  onTypeChange(val) {
+    this.type= val ; 
+  }
+
+
   files: File[] = [];
+  image_edit = false;
   imagesObj = {}
 
   onSelect(event) {

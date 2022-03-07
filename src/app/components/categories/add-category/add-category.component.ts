@@ -13,6 +13,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AddCategoryComponent implements OnInit {
   type:number ;
   categoryForm: FormGroup;
+
+  categories_Settings_filter = {};
+  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+
   constructor(private globalService: GlobalService,private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -20,15 +24,34 @@ export class AddCategoryComponent implements OnInit {
       'name_ar': new FormControl(null, Validators.required),
       'name_en': new FormControl(null, Validators.required),
       // 'image' :new FormControl(null, Validators.required) ,
-      'type':new FormControl(null,Validators.required),
-
+      // 'type':new FormControl(null,Validators.required),
     });
-    
-   }
-
-  onTypeChange(val) {
-    this.type=val ; 
+    this.categories_Settings_filter = {
+      singleSelection: true,
+      idField: 'programaticValue',
+      textField: 'showedValue',
+      // selectAllText: 'اختيار الكل ',
+      unSelectAllText: 'الغاء الاختيار',
+      itemsShowLimit: 10,
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true
+    };
   }
+
+  // DROPDOWN CODE 1
+  onSelect_Filter(item: any) {
+    console.log('selectedFilter', item);
+    this.type = item['programaticValue'];
+    // categories_List
+    // this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
+    //   console.log('categoriesRes', categoriesRes);
+    //   this.categories_List = categoriesRes['data'];
+    // });
+  }
+
+  // onTypeChange(val) {
+  //   this.type= val ; 
+  // }
 
 
   files: File[] = [];
@@ -50,20 +73,16 @@ export class AddCategoryComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
   onSubmit(){
-    console.log(this.categoryForm.value) ;
+    console.log({...this.categoryForm.value, type: this.type, ...this.imagesObj}) ;
     this.spinner.show();
-    this.globalService.addAdminCategory({...this.categoryForm.value ,  ...this.imagesObj}).subscribe( res => {
+    this.globalService.addAdminCategory({...this.categoryForm.value, type: this.type, ...this.imagesObj}).subscribe( res => {
       console.log( res)
-    this.spinner.hide()
-    Swal.fire(
-        'نجاح',
-        'تم إضافة الفئة بنجاح',
-        'success'
-    )
-    
-    })
-    
-  
+      this.spinner.hide()
+      Swal.fire(
+          'نجاح',
+          'تم إضافة الفئة بنجاح',
+          'success'
+      )
+    });
   }
-
 }

@@ -1,0 +1,41 @@
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update" >
+            <div class="col-md-12">
+                <div class="card-body">
+                    <form [formGroup]="AddCompanyForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>أسم شركة الشحن</mat-label>
+                            <input matInput type="text" [formControlName]="'name'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>حساب شركة الشحن</mat-label>
+                            <input matInput type="text" [formControlName]="'email'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>الرقم السري</mat-label>
+                            <input matInput type="text" [formControlName]="'password'">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>تأكيد الرقم السري</mat-label>
+                            <input matInput type="text" [formControlName]="'confirm_password'">
+                        </mat-form-field>
+                        <div class="form-group">
+                            <label for="">صورة المتجر</label>
+                            <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif" [multiple]="false">
+                                <ngx-dropzone-label>أضغط هنا لإختيار صورة للمتجر</ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f" >
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit" 
+                            [disabled]="AddCompanyForm.invalid || files.length < 1">أضافة متجر</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

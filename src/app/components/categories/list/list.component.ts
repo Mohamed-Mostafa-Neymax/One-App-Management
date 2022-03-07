@@ -18,28 +18,63 @@ export class ListComponent implements OnInit {
    type:number ;
    check =false;
   categories=[] ;
+
+  categories_Settings_filter = {};
+  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+
   constructor(private dialog:MatDialog, private globalService:GlobalService, private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.filterForm=new FormGroup({
       'type': new FormControl(null , Validators.required) ,
-    })
+    });
+    this.categories_Settings_filter = {
+      singleSelection: true,
+      idField: 'programaticValue',
+      textField: 'showedValue',
+      // selectAllText: 'اختيار الكل ',
+      unSelectAllText: 'الغاء الاختيار',
+      itemsShowLimit: 10,
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true
+    };
   }
 
-  onTypeChange(val) {
-    this.type=val ; 
-    this.globalService.allUserCategory(this.type).subscribe(categories=>{
-      this.categories=categories['data'] ;
-    })
-    this.check=true ;
+  onSelect_Filter(item: any) {
+    console.log('selectedFilter', item);
+    this.type = item.programaticValue;
+    
+    // categories_List
+    this.listCategories(this.type);
+    // this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
+    //   console.log('categoriesRes', categoriesRes);
+    //   this.categories_List = categoriesRes['data'];
+    // });
   }
 
-  categoryList() {
-    this.globalService.allUserCategory(this.type).subscribe( categories => {
+  listCategories(type_num) {
+    this.globalService.allUserCategory(type_num).subscribe( categories => {
       console.log(categories['data']);
       this.categories = categories['data'];
     });
   }
+
+
+
+  // onTypeChange(val) {
+  //   this.type=val ; 
+  //   this.globalService.allUserCategory(this.type).subscribe(categories=>{
+  //     this.categories=categories['data'] ;
+  //   })
+  //   this.check=true ;
+  // }
+
+  // categoryList() {
+  //   this.globalService.allUserCategory(this.type).subscribe( categories => {
+  //     console.log(categories['data']);
+  //     this.categories = categories['data'];
+  //   });
+  // }
 
   // onShowDetails(cat) {
   //   let dialogRef = this.dialog.open( CategoryDetailsComponent, {
@@ -54,20 +89,19 @@ export class ListComponent implements OnInit {
       height: '600px',
       width: '600px',
     });
-    dialogRef.afterClosed().subscribe( res =>  this.categoryList() );
+    dialogRef.afterClosed().subscribe( res =>  this.listCategories(this.type) );
   }
   onDeleteCat(cat_id) {
     this.spinner.show();
     this.globalService.deleteAdminCategory(cat_id).subscribe(res =>{
-     this.spinner.hide();
+      this.spinner.hide();
       Swal.fire(
         'نجاح',
         'تم حذف الفئة بنجاح',
         'success'
       )
       this.dialog.closeAll();
-     
-      this.categoryList() ;
+      this.listCategories(this.type);
     });
   }
 

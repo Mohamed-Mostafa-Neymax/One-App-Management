@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row project-cards">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="user-status">
+                        <table class="table table-bordernone">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" class="text-center">#</th>
+                                    <th scope="col" class="text-center">أسم العلامة باللغة العربية</th>
+                                    <th scope="col" class="text-center">أسم العلامة باللغة الأنجليزية</th>
+                                    <th scope="col" class="text-center">الإعدادات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tag of tagsArr; let i = index;">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{tag.name_ar}}</td>
+                                    <td>{{tag.name_en}}</td>
+                                    <td>
+                                        <!-- <i class="fas fa-eye text-success" style="cursor: pointer;" (click)="onDetailFilter(filter)"></i>
+                                            | -->
+                                        <i class="fas fa-edit text-info" style="cursor: pointer;"
+                                            (click)="onEditTag(tag)"></i>
+                                        |
+                                        <i class="fas fa-trash-alt text-danger" style="cursor: pointer;"
+                                            (click)="onDeleteTag(tag.id)"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

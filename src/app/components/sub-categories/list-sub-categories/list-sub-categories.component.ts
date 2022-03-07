@@ -15,17 +15,67 @@ export class ListSubCategoriesComponent implements OnInit {
   categories = [] ;
   subcCategories=[];
   check = false ;
-  filterForm:FormGroup ;
+  // filterForm:FormGroup ;
   type:number ;
   id:number ;
+
+  categories_Settings_filter = {};
+  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+
+  categories_Settings = {};
+  categories_List = [];
+
   constructor(private dialog:MatDialog, private globalService: GlobalService,private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.filterForm=new FormGroup({
-      'type' : new FormControl(null , Validators.required) ,
-      'category' : new FormControl(null , Validators.required) ,
-    })
+    // this.filterForm=new FormGroup({
+    //   'type' : new FormControl(null , Validators.required) ,
+    //   'category' : new FormControl(null , Validators.required) ,
+    // });
+    this.categories_Settings_filter = {
+      singleSelection: true,
+      idField: 'programaticValue',
+      textField: 'showedValue',
+      // selectAllText: 'اختيار الكل ',
+      unSelectAllText: 'الغاء الاختيار',
+      itemsShowLimit: 10,
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true
+    };
+    this.categories_Settings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name_ar',
+      // selectAllText: 'اختيار الكل ',
+      unSelectAllText: 'الغاء الاختيار',
+      itemsShowLimit: 10,
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true
+    };
   }
+
+  onSelect_Filter(item: any) {
+    console.log('selectedFilter', item);
+    // categories_List
+    this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
+      console.log('categoriesRes', categoriesRes);
+      this.categories_List = categoriesRes['data'];
+    });
+  }
+
+
+  onSelect_Category(item: any) {
+    console.log(item);
+    this.globalService.listSubCategories(item.id).subscribe( subCategoriesRes => {
+      console.log('subCategoriesRes', subCategoriesRes);
+      this.subcCategories = subCategoriesRes['data'];
+    });
+  }
+  onSelect_All_Categories(items: any) {
+    console.log(items);
+  }
+
+
 
   onTypeChange(val) {
     this.type=val ; 
