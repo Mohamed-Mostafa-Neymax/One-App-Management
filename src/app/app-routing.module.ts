@@ -17,6 +17,8 @@ import { NotificationModule } from './components/notification/notification.modul
 import { ProductModule } from './components/products/product.module';
 import { SubCategoryModule } from './components/sub-categories/sub-category.module';
 import { CityRoutingModule } from './components/cities/city-routing.module';
+import { CountryModule } from './components/countries/country.module';
+import { CityModule } from './components/cities/city.module';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -38,8 +40,8 @@ const routes: Routes = [
     children: [
       {path:'categories',loadChildren:()=>CategoryModule},
       {path:'sub-categories',loadChildren:()=>SubCategoryModule},
-      {path:'country',loadChildren:()=>countryRoutingModule},
-      {path:'city',loadChildren:()=>CityRoutingModule},
+      {path:'country',loadChildren:()=>CountryModule},
+      {path:'city',loadChildren:()=>CityModule},
       {path:'users',loadChildren:()=>UsersModule},
       {path:'orders',loadChildren:()=>OrdersModule},
       {path:'services',loadChildren:()=>ServicesModule},

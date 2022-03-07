@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CityRoutingModule } from './city-routing.module';
 import { EditCityComponent } from './edit-city/edit-city.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { EditCityComponent } from './edit-city/edit-city.component';
   declarations: [ListCityComponent, AddCityComponent, EditCityComponent],
   imports: [
     CommonModule,
-    CityRoutingModule
+    CityRoutingModule,
+    ReactiveFormsModule 
   ]
 })
-export class CategoryModule { }
+export class CityModule { }

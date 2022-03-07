@@ -45,8 +45,6 @@ products
   }
 
 
-
-
   productDetalis(product){
     let dialogRef = this.dialog.open(CompanyDetailsComponent, {
       data:product,

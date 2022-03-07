@@ -1,1 +1,37 @@
-<p>edit-city works!</p>
+<section id="add-main-page">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-body">
+                
+                    <form [formGroup]="cityForm" (ngSubmit)="onSubmit()">
+                      <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="">الدولة </label>
+                            <input type="text" class="form-control" [formControlName]="'country_name'" disabled>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for=""> المدن التابعة للدولة المختارة </label>
+                            <select class="form-control"  [formControlName]="'city_name'" >
+                                <option  *ngFor="let city of cities" value="{{city.id}}" > {{city.name_ar}} </option>
+                            </select>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                            <label for=""> اسم المدينة باللغة العربية </label>
+                            <input type="text" class="form-control" [formControlName]="'name_ar'">
+                        </div>
+                        <div class="form-group">
+                            <label for=""> اسم المدينة باللغة الانجليزية </label>
+                            <input type="text" class="form-control" [formControlName]="'name_en'">
+                        </div>
+                   
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit">تعديل المدينة </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

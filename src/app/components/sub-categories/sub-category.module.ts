@@ -6,13 +6,21 @@ import { AddSubCategoryComponent } from './add-sub-category/add-sub-category.com
 import { ListSubCategoriesComponent } from './list-sub-categories/list-sub-categories.component';
 import { EditSubCategoryComponent } from './edit-sub-category/edit-sub-category.component';
 import { DetailSubCategoryComponent } from './detail-sub-category/detail-sub-category.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
+import { MatDialogModule } from '@angular/material/dialog';
 
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
   declarations: [AddSubCategoryComponent, ListSubCategoriesComponent, EditSubCategoryComponent, DetailSubCategoryComponent],
   imports: [
     CommonModule,
-    SubCategoryRoutingModule
+    SubCategoryRoutingModule,
+    ReactiveFormsModule ,
+    NgxDropzoneModule,
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class SubCategoryModule { }

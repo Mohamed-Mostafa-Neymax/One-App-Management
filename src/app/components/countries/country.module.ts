@@ -4,14 +4,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { countryRoutingModule } from './country-routing.module';
 import { EditCountryComponent } from './edit-country/edit-country.component';
-
-
-
+import {ReactiveFormsModule } from '@angular/forms' ;
 @NgModule({
   declarations: [ListCountryComponent, AddCountryComponent, EditCountryComponent],
   imports: [
     CommonModule,
-    countryRoutingModule
+    countryRoutingModule,
+    ReactiveFormsModule
   ]
 })
-export class CategoryModule { }
+export class CountryModule { }

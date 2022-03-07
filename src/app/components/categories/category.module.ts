@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 import { CategoryRoutingModule } from './category-routing.module';
 import { ListComponent } from './list/list.component';
@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 
 

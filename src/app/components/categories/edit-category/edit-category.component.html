@@ -3,17 +3,36 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card-body">
+                 
                     <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="">النوع</label>
+                            <input type="text" class="form-control" [formControlName]="'type'"> 
+                        </div>
+
                         <div class="form-group">
                             <label for="">اسم الفئه باللغه العربيه</label>
                             <input type="text" class="form-control" [formControlName]="'name_ar'">
                         </div>
+
                         <div class="form-group">
                             <label for="">اسم الفئه باللغة الانجليزية</label>
                             <input type="text" class="form-control" [formControlName]="'name_en'">
                         </div>
+
+                        <div class="form-group">
+                            <label for="">صورة الفئه</label>
+                            <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif" [multiple]="false" >
+                                <ngx-dropzone-label>أضغط هنا لإختيار صورة الفئه</ngx-dropzone-label>
+                                <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f" >
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+
                         <div class="form-group text-center mt-5">
-                            <button class="btn btn-primary" type="submit">إضافة الفئة</button>
+                            <button class="btn btn-primary" type="submit">تعديل الفئة</button>
                         </div>
                     </form>
                 </div>

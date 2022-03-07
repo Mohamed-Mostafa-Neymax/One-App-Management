@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryDetailsComponent } from '../category-details/category-details.component';
 import { GlobalService } from 'src/app/services/global.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
@@ -13,25 +14,28 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-
-  categories=[
-    {
-      name:'Digital Services',
-      image:'assets/images/cat1.jpeg'
-    },
-    {
-      name:'Delivery Services',
-      image:'assets/images/cat2.jpeg'
-    }
-  ];
+  filterForm:FormGroup ;
+   type:number ;
+   check =false;
+  categories=[] ;
   constructor(private dialog:MatDialog, private globalService:GlobalService, private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.categoryList();
+    this.filterForm=new FormGroup({
+      'type': new FormControl(null , Validators.required) ,
+    })
+  }
+
+  onTypeChange(val) {
+    this.type=val ; 
+    this.globalService.allUserCategory(this.type).subscribe(categories=>{
+      this.categories=categories['data'] ;
+    })
+    this.check=true ;
   }
 
   categoryList() {
-    this.globalService.allCategories().subscribe( categories => {
+    this.globalService.allUserCategory(this.type).subscribe( categories => {
       console.log(categories['data']);
       this.categories = categories['data'];
     });
@@ -52,8 +56,19 @@ export class ListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe( res =>  this.categoryList() );
   }
-  onDeleteCat(cat) {
-
+  onDeleteCat(cat_id) {
+    this.spinner.show();
+    this.globalService.deleteAdminCategory(cat_id).subscribe(res =>{
+     this.spinner.hide();
+      Swal.fire(
+        'نجاح',
+        'تم حذف الفئة بنجاح',
+        'success'
+      )
+      this.dialog.closeAll();
+     
+      this.categoryList() ;
+    });
   }
 
 

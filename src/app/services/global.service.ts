@@ -24,12 +24,75 @@ export class GlobalService {
     return this.http.get(`${environment.endpoint}/user/categories/all?type=2`);
   }
   addCategory(category){
-    return this.http.post(`${environment.endpoint}/shop/category/add`, category)
+    return this.http.post(`${environment.endpoint}/shop/category/add`, category);
   }
   deleteCategory(category_id){
-    return this.http.delete(`${environment.endpoint}/admin/category/delete?category_id=${category_id}`)
+    return this.http.delete(`${environment.endpoint}/admin/category/delete?category_id=${category_id}`);
   }
-  
+///////////////////Start From : Country //////////////////
+allCountries(){
+  return this.http.get(`${environment.endpoint}/user/countries/all`);
+}
+
+addCountry(country){
+  return this.http.post(`${environment.endpoint}/admin/country/create`, country);
+}
+ 
+editCountry(country){
+return this.http.post(`${environment.endpoint}/admin/country/edit` , country);
+}
+
+deleteCountry(country_id) {
+  return this.http.delete(`${environment.endpoint}/admin/country/delete?country_id=${country_id}`) ;
+}
+/////////////////////City///////////////////////////
+
+getCityByCountryId(country_id) {
+  return this.http.get(`${environment.endpoint}/user/cities/all?country_id=${country_id}`);
+}
+
+addCity(city) {
+  return this.http.post(`${environment.endpoint}/admin/city/create` , city) ;
+}
+
+editCity(city){
+  return this.http.post(`${environment.endpoint}/admin/city/edit` , city);
+}
+deleteCity(city_id){
+ return this.http.delete(`${environment.endpoint}/admin/city/delete?city_id=${city_id}`);
+}
+
+//////////////////////Category//////////////////////////
+allUserCategory(type){
+return this.http.get(`${environment.endpoint}/user/categories/all?type=${type}`)
+}
+addAdminCategory(category){
+  return this.http.post(`${environment.endpoint}/admin/category/create`,category) ; 
+}
+
+editAdminCategory(category){
+  return this.http.post(`${environment.endpoint}/admin/category/edit`,category) ; 
+}
+deleteAdminCategory(category_id){
+  return this.http.delete(`${environment.endpoint}/admin/category/delete?category_id=${category_id}`) ; 
+}
+/////////////////////SubCategory///////////////////////////
+
+allUserSubCategory(category_id){
+  return this.http.get(`${environment.endpoint}/user/subcategories/all?category_ids[0]=${category_id}`)
+}
+addAdminSubCategory(subCategory){
+ return this.http.post(`${environment.endpoint}/admin/subcategory/create`,subCategory)
+}
+editAdminSubCategory(subCategory){
+return this.http.post(`${environment.endpoint}/admin/subcategory/edit`,subCategory)
+}
+
+deleteAdminSubCategory(subCategory_id) {
+return this.http.delete(`${environment.endpoint}/admin/subcategory/delete?subcategory_id=${subCategory_id}`)
+}
+////////////////////// End //////////////////////////
+
   uploadImage(f){
     return this.http.post(`${environment.endpoint}/user/files/add`, f);
   }
