@@ -23,7 +23,7 @@
                             <input type="text" class="form-control" [formControlName]="'name_en'">
                         </div> -->
                         <div class="form-group text-center mt-5">
-                            <button class="btn btn-primary" type="submit">إضافة الدولة </button>
+                            <button class="btn btn-primary" type="submit" [disabled]="countryForm.invalid">إضافة الدولة </button>
                         </div>
                     </form>
                 </div>

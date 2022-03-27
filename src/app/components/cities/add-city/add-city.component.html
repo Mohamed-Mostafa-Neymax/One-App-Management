@@ -4,41 +4,13 @@
             <div class="col-md-12">
                 <div class="card-body">
                     <form [formGroup]="cityForm" (ngSubmit)="onSubmit()">
-
-                        
-
-
-
-                        <div class="row" > 
-                            <!-- <div class="col-md-6 form-group">
-                                <label for="">اختر دولة </label>
-                                <select class="form-control" [formControlName]="'allCountries'"  (change)="onCountryChange($event.target.value)">
-                                    <option  *ngFor="let country of countries" value="{{country.id}}" > {{country.name_ar}} </option>
-                                </select>
-                            </div> -->
+                        <div class="row">
                             <div class="form-group col-12">
                                 <label for="">الدول</label>
                                 <ng-multiselect-dropdown [formControlName]="'country_id'" [settings]="countries_Settings_filter" [data]="countries_list" (onSelect)="onSelect_Counrty($event)">
                                 </ng-multiselect-dropdown>
                             </div>
-                            <!-- <div class="form-group col-12">
-                                <label for="">الأقسام الأساسية</label>
-                                <ng-multiselect-dropdown [settings]="cities_Settings_filter" [data]="cities_list"
-                                
-                                    (onSelect)="onSelect_City($event)" (onSelectAll)="onSelect_All_Cities($event)">
-                                </ng-multiselect-dropdown>
-                            </div> -->
-
-
-
-                            <!-- <div class="col-md-6 form-group">
-                                <label for=""> المدن التابعة للدولة المختارة </label>
-                                <select class="form-control"  [formControlName]="'allCities'" >
-                                    <option  *ngFor="let city of cities" value="{{city.id}}" > {{city.name_ar}} </option>
-                                </select>
-                            </div> -->
-                        </div> 
-
+                        </div>
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>اسم المدينة باللغة العربية</mat-label>
                             <input matInput type="text" [formControlName]="'name_ar'">
@@ -47,14 +19,6 @@
                             <mat-label>اسم المدينة باللغة العربية</mat-label>
                             <input matInput type="text" [formControlName]="'name_en'">
                         </mat-form-field>
-                        <!-- <div class="form-group">
-                            <label for=""> اسم المدينة باللغة العربية </label>
-                            <input type="text" class="form-control" [formControlName]="'name_ar'">
-                        </div> -->
-                        <!-- <div class="form-group">
-                            <label for=""> اسم المدينة باللغة الانجليزية </label>
-                            <input type="text" class="form-control" [formControlName]="'name_en'">
-                        </div> -->
                         <div class="form-group text-center mt-5">
                             <button class="btn btn-primary" type="submit">إضافة مدينة</button>
                         </div>

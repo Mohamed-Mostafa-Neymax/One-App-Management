@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCityComponent } from './add-city/add-city.component';
 
 const routes: Routes = [
-  {path:'list',component:ListCityComponent},
-  {path:'add',component: AddCityComponent}
+  {path:'list',component:ListCityComponent, data: { title: 'قائمة المدن' }},
+  {path:'add',component: AddCityComponent, data: { title: 'أضافة مدينة' }}
 ];
 
 @NgModule({

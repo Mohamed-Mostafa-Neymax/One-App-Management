@@ -38,13 +38,13 @@ export class ListFilterComponent implements OnInit {
 
   onDeleteFilter(filter_id){
     this.spinner.show();
-    this.globalService.deleteFilter(filter_id).subscribe( deleteRes =>{
+    this.globalService.deleteFilter(filter_id).subscribe( deleteRes => {
       this.spinner.hide();
       Swal.fire(
         'نجاح',
         'تم حذف التصفية بنجاح',
         'success'
-      )
+      );
       this.onListFilters();
     })
   }

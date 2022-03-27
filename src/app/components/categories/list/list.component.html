@@ -12,12 +12,12 @@
                       </select>
                     </form>
                    </div> -->
-                   <div class="form-group col-12">
+                   <!-- <div class="form-group col-12">
                     <label for="">تصنيف الأقسام</label>
                     <ng-multiselect-dropdown [settings]="categories_Settings_filter" [data]="categories_List_filter" 
                     (onSelect)="onSelect_Filter($event)">
                     </ng-multiselect-dropdown>
-                </div>
+                </div> -->
                    <!-- <div class="col-md-12 text-center filter" *ngIf="!check ; else showTable"> 
                       <p> Choose Category </p>
                     </div>  -->
@@ -35,8 +35,7 @@
                           <td>{{ category.name_ar }}</td>
                           
                           <td>
-                            <i class="fas fa-edit text-info" style="cursor: pointer;" (click)="onEditCat(category)"></i>
-                            |
+                            <i class="fas fa-edit text-info" style="cursor: pointer;" (click)="onEditCat(category)"></i> |
                             <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="onDeleteCat(category.id)"></i>
                           </td>
                         </tr>

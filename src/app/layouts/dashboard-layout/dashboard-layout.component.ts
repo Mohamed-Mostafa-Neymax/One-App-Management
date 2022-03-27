@@ -15,6 +15,8 @@ export class DashboardLayoutComponent implements OnInit {
   constructor(titleService:Title, router:Router) {
     router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
+        console.log('event', event);
+        console.log('this', this);
         let title = this.getTitle(router.routerState, router.routerState.root).join('-');
         this.pageTitle = title
         // change page title in browser

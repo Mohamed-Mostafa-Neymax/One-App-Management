@@ -10,18 +10,18 @@
                             <label for="">الدولة </label>
                             <input type="text" class="form-control" [formControlName]="'country_name'">
                         </div> -->
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <label for="">الدول</label>
-                            <select class="form-control" [formControlName]="'country_id'" (change)="onChangeCountry($event)">
+                            <select class="form-control" [formControlName]="'country_id'">
                                 <option *ngFor="let country of countries" value="{{country.id}}">{{country.name_ar}}</option>
                             </select>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <!-- <div class="col-md-6 form-group">
                             <label for="">المدن</label>
                             <select class="form-control" [formControlName]="'city_id'">
                                 <option *ngFor="let city of cities" value="{{city.id}}">{{city.name_ar}}</option>
                             </select>
-                        </div>
+                        </div> -->
                       </div>
 
 

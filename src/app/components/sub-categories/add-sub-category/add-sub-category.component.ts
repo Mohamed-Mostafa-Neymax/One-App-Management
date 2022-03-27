@@ -13,8 +13,8 @@ export class AddSubCategoryComponent implements OnInit {
   subCategoryForm:FormGroup;
   category_id: number;
   // categories=[]; 
-  categories_Settings_filter = {};
-  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+  // categories_Settings_filter = {};
+  // categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
 
   categories_Settings = {};
   categories_List = [];
@@ -28,18 +28,22 @@ export class AddSubCategoryComponent implements OnInit {
       'name_ar':new FormControl(null , Validators.required) ,
       'name_en':new FormControl(null , Validators.required) ,
     });
-    this.categories_Settings_filter = {
-      singleSelection: true,
-      idField: 'programaticValue',
-      textField: 'showedValue',
-      // selectAllText: 'اختيار الكل ',
-      unSelectAllText: 'الغاء الاختيار',
-      itemsShowLimit: 10,
-      allowSearchFilter: false,
-      closeDropDownOnSelection: true
-    };
+    // this.categories_Settings_filter = {
+    //   singleSelection: true,
+    //   idField: 'programaticValue',
+    //   textField: 'showedValue',
+    //   // selectAllText: 'اختيار الكل ',
+    //   unSelectAllText: 'الغاء الاختيار',
+    //   itemsShowLimit: 10,
+    //   allowSearchFilter: false,
+    //   closeDropDownOnSelection: true
+    // };
+    this.globalService.listCategories().subscribe( categoriesRes => {
+      console.log('categoriesRes', categoriesRes);
+      this.categories_List = categoriesRes['data'];
+    });
     this.categories_Settings = {
-      singleSelection: false,
+      singleSelection: true,
       idField: 'id',
       textField: 'name_ar',
       // selectAllText: 'اختيار الكل ',
@@ -59,15 +63,9 @@ export class AddSubCategoryComponent implements OnInit {
   //   })
   // }
 
-  onSelect_Filter(item: any) {
-    console.log('selectedFilter', item);
-    // categories_List
-    
-    this.globalService.allUserCategory(item.programaticValue).subscribe( categoriesRes => {
-      console.log('categoriesRes', categoriesRes);
-      this.categories_List = categoriesRes['data'];
-    });
-  }
+  // onSelect_Filter(item: any) {
+  //   console.log('selectedFilter', item);
+  // }
   // DROPDOWN CODE 2
   onSelect_Category(item: any) {
     console.log(item);
@@ -106,16 +104,14 @@ export class AddSubCategoryComponent implements OnInit {
     console.log({...updatedSubObj ,  ...this.imagesObj});
     this.spinner.show();
     this.globalService.addAdminSubCategory({...updatedSubObj ,  ...this.imagesObj}).subscribe( res => {
-      console.log( "res");
-    console.log( res);
-    this.spinner.hide()
-    Swal.fire(
+      console.log("res");
+      console.log( res);
+      this.spinner.hide()
+      Swal.fire(
         'نجاح',
         'تم إضافة الفئة الفرعية بنجاح',
         'success'
-    )
-    
+      )
     })
-    
   }
 }

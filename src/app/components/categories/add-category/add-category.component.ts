@@ -14,8 +14,8 @@ export class AddCategoryComponent implements OnInit {
   type:number ;
   categoryForm: FormGroup;
 
-  categories_Settings_filter = {};
-  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+  // categories_Settings_filter = {};
+  // categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
 
   constructor(private globalService: GlobalService,private spinner:NgxSpinnerService) { }
 
@@ -26,28 +26,23 @@ export class AddCategoryComponent implements OnInit {
       // 'image' :new FormControl(null, Validators.required) ,
       // 'type':new FormControl(null,Validators.required),
     });
-    this.categories_Settings_filter = {
-      singleSelection: true,
-      idField: 'programaticValue',
-      textField: 'showedValue',
-      // selectAllText: 'اختيار الكل ',
-      unSelectAllText: 'الغاء الاختيار',
-      itemsShowLimit: 10,
-      allowSearchFilter: false,
-      closeDropDownOnSelection: true
-    };
+    // this.categories_Settings_filter = {
+    //   singleSelection: true,
+    //   idField: 'programaticValue',
+    //   textField: 'showedValue',
+    //   // selectAllText: 'اختيار الكل ',
+    //   unSelectAllText: 'الغاء الاختيار',
+    //   itemsShowLimit: 10,
+    //   allowSearchFilter: false,
+    //   closeDropDownOnSelection: true
+    // };
   }
 
   // DROPDOWN CODE 1
-  onSelect_Filter(item: any) {
-    console.log('selectedFilter', item);
-    this.type = item['programaticValue'];
-    // categories_List
-    // this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
-    //   console.log('categoriesRes', categoriesRes);
-    //   this.categories_List = categoriesRes['data'];
-    // });
-  }
+  // onSelect_Filter(item: any) {
+  //   console.log('selectedFilter', item);
+  //   this.type = item['programaticValue'];
+  // }
 
   // onTypeChange(val) {
   //   this.type= val ; 
@@ -63,7 +58,6 @@ export class AddCategoryComponent implements OnInit {
     const formData = new FormData();
     formData.append("files[0]", this.files[0]);
     this.globalService.uploadImage(formData).subscribe( imgStringRes => {
-      // console.log(imgStringRes);
       this.imagesObj['image'] = imgStringRes['files'][0];
       console.log(this.imagesObj);
     });
@@ -73,9 +67,9 @@ export class AddCategoryComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
   onSubmit(){
-    console.log({...this.categoryForm.value, type: this.type, ...this.imagesObj}) ;
+    // console.log({...this.categoryForm.value, type: this.type, ...this.imagesObj}) ;
     this.spinner.show();
-    this.globalService.addAdminCategory({...this.categoryForm.value, type: this.type, ...this.imagesObj}).subscribe( res => {
+    this.globalService.addAdminCategory({...this.categoryForm.value, type: 2, ...this.imagesObj}).subscribe( res => {
       console.log( res)
       this.spinner.hide()
       Swal.fire(

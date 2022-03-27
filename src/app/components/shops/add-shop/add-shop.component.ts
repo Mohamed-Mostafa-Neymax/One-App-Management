@@ -95,7 +95,7 @@ export class AddShopComponent implements OnInit {
   onSelect_Filter(item: any) {
     console.log('selectedFilter', item);
     // categories_List
-    this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
+    this.globalService.listCategories().subscribe( categoriesRes => {
       console.log('categoriesRes', categoriesRes);
       this.categories_List = categoriesRes['data'];
     });

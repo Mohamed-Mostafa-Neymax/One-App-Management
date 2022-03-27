@@ -1,7 +1,6 @@
 import { CityModule } from './components/cities/city.module';
 import { CountryModule } from './components/countries/country.module';
 
-import { countryRoutingModule } from './components/countries/country-routing.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WrongRouteComponent } from './components/auth/errors/wrong-route/wrong-route.component';
@@ -19,6 +18,9 @@ import { TagsModule } from './components/tags/tags.module';
 import { ShopsModule } from './components/shops/shops.module';
 import { DeliveryCompaniesModule } from './components/delivery-companies/delivery-companies.module';
 import { VouchersModule } from './components/vouchers/vouchers.module';
+import { DeliveryFeeModule } from './components/delivery-fee/delivery-fee.module';
+import { SettingsOrdersParcelsModule } from './components/settings-orders-parcels/settings-orders-parcels.module';
+import { SettingsClientsModule } from './components/settings-clients/settings-clients.module';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -47,6 +49,9 @@ const routes: Routes = [
       { path: 'shops', loadChildren: () => ShopsModule },
       { path: 'delivery-companies', loadChildren: () => DeliveryCompaniesModule },
       { path: 'vouchers', loadChildren: () => VouchersModule },
+      { path: 'delivery-fee', loadChildren: () => DeliveryFeeModule },
+      { path: 'settings-orders', loadChildren: () => SettingsOrdersParcelsModule },
+      { path: 'settings-clients', loadChildren: () => SettingsClientsModule },
       { path: 'services', loadChildren: () => ServicesModule },
       {path:'reports',loadChildren:()=>ReportsModule},
     ]

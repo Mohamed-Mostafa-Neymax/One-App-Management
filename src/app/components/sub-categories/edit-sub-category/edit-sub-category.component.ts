@@ -15,47 +15,50 @@ export class EditSubCategoryComponent implements OnInit {
   categories = []  ;
   subcCategories=[]; 
   category_name :string ;
-  id:number ;
-  type:number ;
-  check= true ; 
+  // id:number ;
+  // type:number ;
+  // check= true ; 
   componentRef: any;
   image_edit = false;
    
   constructor(private dialog:MatDialog, private globalService:GlobalService, @Inject(MAT_DIALOG_DATA) public data:any, private spinner:NgxSpinnerService) { }
   
   ngOnInit(): void {
-    this.subCategoryForm = new FormGroup({
-     'type' : new FormControl(this.data.category.type , Validators.required), 
-     'category_id' : new FormControl(this.data.category_id , Validators.required) ,
-     'name_ar' : new FormControl(this.data.name_ar , Validators.required), 
-     'name_en' : new FormControl(this.data.name_en , Validators.required), 
-     
-     
+    console.log('initial Data', this.data);
+    
+    this.globalService.listCategories().subscribe(categories => {
+      this.categories = categories['data'];
     })
-   this.check=true ;
+
+    this.subCategoryForm = new FormGroup({
+      'category_id' : new FormControl(this.data.category_id , Validators.required),
+      'name_ar' : new FormControl(this.data.name_ar , Validators.required),
+      'name_en' : new FormControl(this.data.name_en , Validators.required)
+    })
+  //  this.check=true ;
    
    
   }
  
 
-  onTypeChange(val) {
-    this.type=val ;
-    this.globalService.allUserCategory(this.type).subscribe(categories=>{
-      this.categories=categories['data'] ;
-    })
-    this.check=false;
-  }
-  onCategoryChange(category_id){
-    this.id=category_id;
+  // onTypeChange(val) {
+  //   this.type=val ;
+  //   this.globalService.listCategories().subscribe(categories=>{
+  //     this.categories=categories['data'];
+  //   })
+  //   this.check=false;
+  // }
+  // onCategoryChange(category_id){
+  //   this.id=category_id;
     
-    this.globalService.allUserSubCategory(this.id).subscribe(subcategories=>{
-      this.subcCategories=subcategories['data'] ;
-    })
-    this.check=false;
-  }
+  //   this.globalService.allUserSubCategory(this.id).subscribe(subcategories=>{
+  //     this.subcCategories=subcategories['data'] ;
+  //   })
+  //   this.check=false;
+  // }
 
   
-  files: File[] = [];
+  files: any[] = [0];
   imagesObj = {} 
   onSelect(event) {
     this.files = [];
@@ -63,7 +66,9 @@ export class EditSubCategoryComponent implements OnInit {
      const formData = new FormData( );
     formData.append("files[0]", this.files[0]);
       this.globalService.uploadImage(formData).subscribe( imgStringRes => {
-      this.imagesObj['image'] = imgStringRes['files'][0];
+        console.log('imgStringRes', imgStringRes);
+        
+        this.imagesObj['image'] = imgStringRes['files'][0];
      
     });
   }
@@ -77,18 +82,18 @@ export class EditSubCategoryComponent implements OnInit {
   
  
   onSubmit() {
+    console.log('Edited SubCategory', {...this.subCategoryForm.value ,  ...this.imagesObj , subcategory_id: this.data.id});
     this.spinner.show();
-    this.globalService.editAdminSubCategory({...this.subCategoryForm.value ,  ...this.imagesObj , subcategory_id:this.data.id}).subscribe( res => {
-    console.log("ressss :")
-      console.log(res);
-    this.spinner.hide()
-    Swal.fire(
-        'نجاح',
-        'تم تعديل الفئة الفرعية بنجاح',
-        'success'
-    )
-    this.dialog.closeAll();
-    });
-    
+    this.globalService.editAdminSubCategory({...this.subCategoryForm.value,  ...this.imagesObj, subcategory_id: this.data.id})
+      .subscribe( editedSubCategoryRes => {
+        console.log('editedSubCategoryRes', editedSubCategoryRes);
+        this.spinner.hide()
+        Swal.fire(
+            'نجاح',
+            'تم تعديل الفئة الفرعية بنجاح',
+            'success'
+        );
+        this.dialog.closeAll();
+      });
   }
 }

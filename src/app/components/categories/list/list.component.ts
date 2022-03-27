@@ -14,49 +14,41 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  filterForm:FormGroup ;
-   type:number ;
-   check =false;
-  categories=[] ;
+  filterForm: FormGroup;
+  type: number;
+  check = false;
+  categories = [];
 
-  categories_Settings_filter = {};
-  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+  // categories_Settings_filter = {};
+  // categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
 
   constructor(private dialog:MatDialog, private globalService:GlobalService, private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.filterForm=new FormGroup({
+    this.onlistCategories();
+    this.filterForm = new FormGroup({
       'type': new FormControl(null , Validators.required) ,
     });
-    this.categories_Settings_filter = {
-      singleSelection: true,
-      idField: 'programaticValue',
-      textField: 'showedValue',
-      // selectAllText: 'اختيار الكل ',
-      unSelectAllText: 'الغاء الاختيار',
-      itemsShowLimit: 10,
-      allowSearchFilter: false,
-      closeDropDownOnSelection: true
-    };
+    // this.categories_Settings_filter = {
+    //   singleSelection: true,
+    //   idField: 'programaticValue',
+    //   textField: 'showedValue',
+    //   // selectAllText: 'اختيار الكل ',
+    //   unSelectAllText: 'الغاء الاختيار',
+    //   itemsShowLimit: 10,
+    //   allowSearchFilter: false,
+    //   closeDropDownOnSelection: true
+    // };
   }
 
-  onSelect_Filter(item: any) {
-    console.log('selectedFilter', item);
-    this.type = item.programaticValue;
-    
-    // categories_List
-    this.listCategories(this.type);
-    // this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
-    //   console.log('categoriesRes', categoriesRes);
-    //   this.categories_List = categoriesRes['data'];
-    // });
-  }
+  // onSelect_Filter(item: any) {
+  //   console.log('selectedFilter', item);
+  //   this.type = item.programaticValue;
+  //   this.listCategories();
+  // }
 
-  listCategories(type_num) {
-    this.globalService.allUserCategory(type_num).subscribe( categories => {
-      console.log(categories['data']);
-      this.categories = categories['data'];
-    });
+  onlistCategories() {
+    this.globalService.listCategories().subscribe( categories => this.categories = categories['data'] );
   }
 
 
@@ -89,7 +81,7 @@ export class ListComponent implements OnInit {
       height: '600px',
       width: '600px',
     });
-    dialogRef.afterClosed().subscribe( res =>  this.listCategories(this.type) );
+    dialogRef.afterClosed().subscribe( res =>  this.onlistCategories() );
   }
   onDeleteCat(cat_id) {
     this.spinner.show();
@@ -101,7 +93,7 @@ export class ListComponent implements OnInit {
         'success'
       )
       this.dialog.closeAll();
-      this.listCategories(this.type);
+      this.onlistCategories();
     });
   }
 

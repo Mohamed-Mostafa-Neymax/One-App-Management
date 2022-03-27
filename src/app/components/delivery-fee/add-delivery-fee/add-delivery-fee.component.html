@@ -1,0 +1,19 @@
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update">
+            <div class="col-md-12">
+                <div class="card-body">
+                    <form [formGroup]="addDeliveryFeeForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>أضف رسم توصيل بالكيلومتر</mat-label>
+                            <input matInput type="number" [formControlName]="'price_per_km'">
+                        </mat-form-field>
+                        <div class="form-group text-center mt-5">
+                            <button class="btn btn-primary" type="submit" [disabled]="addDeliveryFeeForm.invalid">أضافة رسم توصيل</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

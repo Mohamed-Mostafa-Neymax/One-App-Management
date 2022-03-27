@@ -1,0 +1,38 @@
+<section class="animate__animated animate__fadeIn home">
+    <div class="container-fluid card-body card">
+        <div class="row second-chart-list third-news-update" >
+          <div class="col-md-12">
+            <div class="card-body">
+                <div class="card-details text-center" *ngIf="!activateInputs">
+                    <h3 class="text-center">بيانات رسم التوصيل</h3><br>
+                    <table class="table" dir="rtl" style="text-align: right;">
+                    <tbody>
+                        <tr>
+                            <th scope="row">رسم التوصيل بالكيلومتر</th>
+                            <td>{{ deliveryFee['price_per_km'] }}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    <!-- <div class="row">
+                        <div class="col-md-3" *ngFor="let image of data.images">
+                            <img class="w-100" src="{{image}}" alt="" >
+                        </div>
+                    </div> -->
+                </div>
+                <div class="form-group text-center mt-5">
+                    <button class="btn btn-primary" type="button" (click)="onActiveEditing()" *ngIf="!activateInputs">تفعيل التعديل</button>
+                </div>
+              <form [formGroup]="editForm" *ngIf="activateInputs" (ngSubmit)="onSubmit()">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>تعديل رسم التوصيل بالكيلومتر</mat-label>
+                    <input matInput type="text" [formControlName]="'price_per_km'">
+                </mat-form-field>
+                <div class="form-group text-center mt-5">
+                    <button class="btn btn-primary" type="submit">تعديل رسم التوصيل</button>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>

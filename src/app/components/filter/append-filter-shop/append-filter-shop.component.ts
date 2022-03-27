@@ -37,7 +37,8 @@ export class AppendFilterShopComponent implements OnInit {
           // selectAllText: 'اختيار الكل ',
           unSelectAllText: 'الغاء الاختيار',
           itemsShowLimit: 10,
-          allowSearchFilter: false
+          allowSearchFilter: false,
+          closeDropDownOnSelection: true
     };
 
     // this.shopList = [{programaticValue: 0, showedValue: 'مجاني'}, {programaticValue: 1, showedValue: 'له سعر'}];
@@ -48,7 +49,8 @@ export class AppendFilterShopComponent implements OnInit {
           // selectAllText: 'اختيار الكل ',
           unSelectAllText: 'الغاء الاختيار',
           itemsShowLimit: 10,
-          allowSearchFilter: false
+          allowSearchFilter: false,
+          closeDropDownOnSelection: true
     };
   }
 

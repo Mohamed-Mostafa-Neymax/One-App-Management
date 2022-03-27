@@ -4,8 +4,8 @@ import { ListComponent } from './list/list.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 
 const routes: Routes = [
-  {path:'list',component:ListComponent},
-  {path:'add',component:AddCategoryComponent}
+  {path:'list',component:ListComponent, data: { title: 'قائمة الأقسام الأساسية' }},
+  {path:'add',component:AddCategoryComponent, data: { title: 'أضافة قسم أساسي' }}
 ];
 
 @NgModule({

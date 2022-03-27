@@ -17,10 +17,10 @@ export class ListSubCategoriesComponent implements OnInit {
   check = false ;
   // filterForm:FormGroup ;
   type:number ;
-  id:number ;
+  id:number;
 
-  categories_Settings_filter = {};
-  categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
+  // categories_Settings_filter = {};
+  // categories_List_filter = [{programaticValue: 1, showedValue: 'خدمات إلكترونية'}, {programaticValue: 2, showedValue: 'خدمات توصيل'}];
 
   categories_Settings = {};
   categories_List = [];
@@ -28,20 +28,29 @@ export class ListSubCategoriesComponent implements OnInit {
   constructor(private dialog:MatDialog, private globalService: GlobalService,private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.globalService.listCategories().subscribe( categoriesRes => {
+      console.log('categoriesRes', categoriesRes);
+      this.categories_List = categoriesRes['data'];
+    });
+    if( this.id ) {
+      this.globalService.allUserSubCategory(this.id).subscribe(subcategories=>{
+        this.subcCategories = subcategories['data'];
+      });
+    }
     // this.filterForm=new FormGroup({
     //   'type' : new FormControl(null , Validators.required) ,
     //   'category' : new FormControl(null , Validators.required) ,
     // });
-    this.categories_Settings_filter = {
-      singleSelection: true,
-      idField: 'programaticValue',
-      textField: 'showedValue',
-      // selectAllText: 'اختيار الكل ',
-      unSelectAllText: 'الغاء الاختيار',
-      itemsShowLimit: 10,
-      allowSearchFilter: false,
-      closeDropDownOnSelection: true
-    };
+    // this.categories_Settings_filter = {
+    //   singleSelection: true,
+    //   idField: 'programaticValue',
+    //   textField: 'showedValue',
+    //   // selectAllText: 'اختيار الكل ',
+    //   unSelectAllText: 'الغاء الاختيار',
+    //   itemsShowLimit: 10,
+    //   allowSearchFilter: false,
+    //   closeDropDownOnSelection: true
+    // };
     this.categories_Settings = {
       singleSelection: false,
       idField: 'id',
@@ -54,18 +63,14 @@ export class ListSubCategoriesComponent implements OnInit {
     };
   }
 
-  onSelect_Filter(item: any) {
-    console.log('selectedFilter', item);
-    // categories_List
-    this.globalService.listCategories(item.programaticValue).subscribe( categoriesRes => {
-      console.log('categoriesRes', categoriesRes);
-      this.categories_List = categoriesRes['data'];
-    });
-  }
+  // onSelect_Filter(item: any) {
+  //   console.log('selectedFilter', item);
+  // }
 
 
   onSelect_Category(item: any) {
     console.log(item);
+    this.id = item.id;
     this.globalService.listSubCategories(item.id).subscribe( subCategoriesRes => {
       console.log('subCategoriesRes', subCategoriesRes);
       this.subcCategories = subCategoriesRes['data'];
@@ -77,24 +82,23 @@ export class ListSubCategoriesComponent implements OnInit {
 
 
 
-  onTypeChange(val) {
-    this.type=val ; 
-    this.globalService.allUserCategory(this.type).subscribe(categories=>{
-     this.categories=categories['data'] ;
-    })
-  }
-  onCategoryChange(category_id){
-    this.id=category_id;
+  // onTypeChange(val) {
+  //   this.type=val ; 
+  //   this.globalService.allUserCategory().subscribe( categories => {
+  //    this.categories=categories['data'] ;
+  //   })
+  // }
+  // onCategoryChange(category_id){
+  //   this.id=category_id;
     
-    this.globalService.allUserSubCategory(this.id).subscribe(subcategories=>{
-      this.subcCategories=subcategories['data'] ;
-    })
-    this.check = true ;
-  }
+    
+  //   this.check = true ;
+  // }
 
   subCategoryList(){
-    this.globalService.allUserSubCategory(this.id).subscribe(subcategories=>{
-      this.subcCategories=subcategories['data'] ;
+    this.globalService.allUserSubCategory(this.id).subscribe(subcategories => {
+      console.log('subcCategories', this.subcCategories);
+      this.subcCategories = subcategories['data'];
     })
     this.check = true ;
   }

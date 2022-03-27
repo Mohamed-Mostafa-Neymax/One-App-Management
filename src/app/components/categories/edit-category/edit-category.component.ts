@@ -19,19 +19,17 @@ export class EditCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.categoryForm = new FormGroup({
       'name_ar': new FormControl(this.data.name_ar, Validators.required),
-      'name_en': new FormControl(this.data.name_en, Validators.required),
-      'type' :new FormControl(this.data.type ,Validators.required),
-   
-       
+      'name_en': new FormControl(this.data.name_en, Validators.required)
+      // 'type' :new FormControl(this.data.type ,Validators.required)
     });
   }
   
-  onTypeChange(val) {
-    this.type= val ; 
-  }
+  // onTypeChange(val) {
+  //   this.type= val ; 
+  // }
 
 
-  files: File[] = [];
+  files: any[] = [0];
   image_edit = false;
   imagesObj = {}
 
@@ -41,7 +39,7 @@ export class EditCategoryComponent implements OnInit {
     const formData = new FormData();
     formData.append("files[0]", this.files[0]);
     this.globalService.uploadImage(formData).subscribe( imgStringRes => {
-      // console.log(imgStringRes);
+      console.log('imgStringRes', imgStringRes);
       this.imagesObj['image'] = imgStringRes['files'][0];
      // console.log(imagesObj);
     });
@@ -51,7 +49,9 @@ export class EditCategoryComponent implements OnInit {
   }
   onSubmit() {
     this.spinner.show();
-    this.globalService.editAdminCategory({...this.categoryForm.value , ...this.imagesObj ,category_id:this.data.id}).subscribe( res=> {
+    this.globalService.editAdminCategory({...this.categoryForm.value, type: 2, ...this.imagesObj ,category_id: this.data.id})
+    .subscribe( editedCategoryRes => {
+      console.log('editedCategoryRes', editedCategoryRes);
       
     this.spinner.hide();
     Swal.fire(
@@ -60,7 +60,6 @@ export class EditCategoryComponent implements OnInit {
         'success'
     )
      this.dialog.closeAll();
-   
     });
    
   }

@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path:'list', component: ListSubCategoriesComponent},
-  {path:'add', component: AddSubCategoryComponent},
+  {path:'list', component: ListSubCategoriesComponent, data: { title: 'قائمة الأقسام الفرعية' }},
+  {path:'add', component: AddSubCategoryComponent, data: { title: 'أضافة قسم فرعي' }},
 ];
 
 @NgModule({

@@ -20,9 +20,9 @@ export class GlobalService {
   allCategories(){
     return this.http.get(`${environment.endpoint}/shop/categories/all`);
   }
-  allCategoriesDeliveryServices() {
-    return this.http.get(`${environment.endpoint}/user/categories/all?type=2`);
-  }
+  // allCategoriesDeliveryServices() {
+  //   return this.http.get(`${environment.endpoint}/user/categories/all?type=2`);
+  // }
   addCategory(category){
     return this.http.post(`${environment.endpoint}/shop/category/add`, category);
   }
@@ -63,9 +63,9 @@ deleteCity(city_id){
 }
 
 //////////////////////Category//////////////////////////
-allUserCategory(type){
-return this.http.get(`${environment.endpoint}/user/categories/all?type=${type}`)
-}
+// allUserCategory(){
+//  return this.http.get(`${environment.endpoint}/user/categories/all?type=${2}`);
+// }
 addAdminCategory(category){
   return this.http.post(`${environment.endpoint}/admin/category/create`,category) ; 
 }
@@ -97,6 +97,7 @@ return this.http.delete(`${environment.endpoint}/admin/subcategory/delete?subcat
     return this.http.post(`${environment.endpoint}/user/files/add`, f);
   }
   
+  // Filter
   addFilter(filterObj) { return this.http.post(`${environment.endpoint}/admin/filter/create`, filterObj); }
   editFilter(filterObj) { return this.http.post(`${environment.endpoint}/admin/filter/edit`, filterObj); }
   appendFilterShop(filterShopObj) { return this.http.post(`${environment.endpoint}/admin/filter/append`, filterShopObj); }
@@ -133,7 +134,7 @@ return this.http.delete(`${environment.endpoint}/admin/subcategory/delete?subcat
   listShops() { return this.http.get(`${environment.endpoint}/admin/shops/all`); }
   
   // Categories
-  listCategories(filter_type) { return this.http.get(`${environment.endpoint}/user/categories/all?type=${filter_type}`); }
+  listCategories() { return this.http.get(`${environment.endpoint}/user/categories/all?type=${2}`); }
   listSubCategories(category_id) { return this.http.get(`${environment.endpoint}/user/subcategories/all?category_ids[0]=${category_id}`); }
 
   // Delivery Companies Requests
@@ -146,4 +147,25 @@ return this.http.delete(`${environment.endpoint}/admin/subcategory/delete?subcat
   editVoucher(voucher_obj) { return this.http.post(`${environment.endpoint}/admin/voucher/edit`, voucher_obj); }
   deleteVoucher(id) { return this.http.delete(`${environment.endpoint}/admin/voucher/delete?voucher_id=${id}`); }
   listVouchers() { return this.http.get(`${environment.endpoint}/admin/vouchers/all`); }
+
+  // Delivery Fee Requests
+  addDeliveryFee(deliveryFee_obj) { return this.http.post(`${environment.endpoint}/admin/set/delivery-fee`, deliveryFee_obj);}
+  editDeliveryFee(editedDeliveryFee_obj) { return this.http.post(`${environment.endpoint}/admin/update/delivery-fee`, editedDeliveryFee_obj); }
+  showDeliveryFee() { return this.http.get(`${environment.endpoint}/show/delivery-fee`); }
+
+  // Settings Orders Parcels Requests
+  listOrders(status_id: number) {
+    return this.http.get(`${environment.endpoint}/admin/orders/all?status_id=${status_id}&service_type=2`);
+  }
+  listParcels(shipment_step_id: number) {
+    return this.http.get(`${environment.endpoint}/admin/parcels/all?shipment_step_id=${shipment_step_id}`);
+  }
+
+  // Settings Users Requests
+  listUsers(status_id: number, type: number) {
+    return this.http.get(`${environment.endpoint}/admin/users/all?status_id=${status_id}&type=${type}`);
+  }
+  manageUsers(user_id: number, status_id: number) {
+    return this.http.get(`${environment.endpoint}/admin/account/activate?user_id=${user_id}&status_id=${status_id}`);
+  }
 }

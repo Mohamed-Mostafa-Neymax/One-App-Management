@@ -5,20 +5,19 @@
                 <div class="card-body">
                  <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()">
                        <div class="row" > 
-                        <div class="col-md-6 form-group">
-                           
+                        <!-- <div class="col-md-6 form-group">
                             <label for="">اختر نوع الخدمة </label>
                             <select class="form-control"   [formControlName]="'type'"  (change)="onTypeChange($event.target.value)">
                                 <option [value]="1"> خدمات الكترونية </option>
                                 <option [value]="2"> خدمات توصيل </option>
                             </select>
-                        </div>
-                        <div class="col-md-6 form-group">
+                        </div> -->
+                        <div class="col-md-12 form-group">
                             
                             <label for="">اختر الفئة </label>
-                            <select class="form-control"  [formControlName]="'category_id'"  (change)="onCategoryChange($event.target.value)">
-                             <option *ngIf="check"> {{data.category.name}} </option>
-                             <option  *ngFor="let category of categories"  [value]="'{{category.id}}'" > {{category.name_ar}} </option>
+                            <select class="form-control"  [formControlName]="'category_id'">
+                             <!-- <option *ngIf="check"> {{data.category.name}} </option> -->
+                             <option *ngFor="let category of categories" [value]="category.id">{{category.name_ar}}</option>
                             </select>
                         </div>
                        
