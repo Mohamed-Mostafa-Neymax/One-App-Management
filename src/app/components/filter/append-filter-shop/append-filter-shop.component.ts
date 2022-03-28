@@ -43,7 +43,7 @@ export class AppendFilterShopComponent implements OnInit {
 
     // this.shopList = [{programaticValue: 0, showedValue: 'مجاني'}, {programaticValue: 1, showedValue: 'له سعر'}];
     this.shopSettings = {
-          singleSelection: true,
+          singleSelection: false,
           idField: 'id',
           textField: 'name_ar',
           // selectAllText: 'اختيار الكل ',
@@ -74,18 +74,21 @@ export class AppendFilterShopComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.filterForm.value);
     this.spinner.show();
-    this.globalService.appendFilterShop(
-      {filter_id: this.filterForm.value.filter_id[0]['id'], shop_id: this.filterForm.value.shop_id[0]['id']})
-      .subscribe( addFilterShopRes => {
-      this.spinner.hide();
-      Swal.fire(
-        'نجاح',
-        'تم أضافة التصفية للمتجر بنجاح',
-        'success'
-      );
-      this.dialog.closeAll();
-      console.log('addFilterShopRes', addFilterShopRes);
-    });
+    for( let c = 0; c < this.filterForm.value.shop_id.length; c++ ) {
+      this.globalService.appendFilterShop(
+        {filter_id: this.filterForm.value.filter_id[0]['id'], shop_id: this.filterForm.value.shop_id[c]['id']})
+        .subscribe( addFilterShopRes => {
+        this.spinner.hide();
+        Swal.fire(
+          'نجاح',
+          'تم أضافة التصفية للمتجر بنجاح',
+          'success'
+        );
+        this.dialog.closeAll();
+        console.log('addFilterShopRes', addFilterShopRes);
+      });
+    }
   }
 }

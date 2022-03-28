@@ -15,6 +15,9 @@ export class AddVoucherComponent implements OnInit {
 
   addVoucherForm: FormGroup;
 
+  voucherSettings = {};
+  voucherList = [];
+
   constructor( private globalService: GlobalService, private dialog:MatDialog, private spinner:NgxSpinnerService ) { }
   ngOnInit(): void {
     this.addVoucherForm = new FormGroup({
@@ -24,8 +27,27 @@ export class AddVoucherComponent implements OnInit {
       'min_order': new FormControl(null, Validators.required),
       'max_order': new FormControl(null, Validators.required),
       'date': new FormControl(null, Validators.required),
-      'time': new FormControl(null, Validators.required)
-    })
+      'time': new FormControl('00:00', Validators.required)
+    });
+
+    this.voucherList = [{programaticValue: 'percent', showedValue: 'نسبة مئوية'}, {programaticValue: 'fixed', showedValue: 'خصم ثابت'}];
+    this.voucherSettings = {
+      singleSelection: true,
+      idField: 'programaticValue',
+      textField: 'showedValue',
+      // selectAllText: 'اختيار الكل ',
+      unSelectAllText: 'الغاء الاختيار',
+      itemsShowLimit: 10,
+      allowSearchFilter: false,
+      closeDropDownOnSelection: true
+    };
+  }
+
+  onSelectShop(item: any) {
+    console.log(item);
+  }
+  onSelectAllShops(items: any) {
+    console.log(items);
   }
 
   onSubmit() {
@@ -33,7 +55,7 @@ export class AddVoucherComponent implements OnInit {
     let prepared_obj = {
       code: this.addVoucherForm.value.code,
       discount: this.addVoucherForm.value.discount,
-      type: this.addVoucherForm.value.type,
+      type: this.addVoucherForm.value.type[0].programaticValue,
       min_order: this.addVoucherForm.value.min_order,
       max_order: this.addVoucherForm.value.max_order,
       expired_at: this.addVoucherForm.value.date + ' ' + this.addVoucherForm.value.time + ':00'

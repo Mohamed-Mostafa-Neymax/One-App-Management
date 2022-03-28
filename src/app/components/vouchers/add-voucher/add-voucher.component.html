@@ -9,13 +9,24 @@
                             <input matInput type="text" [formControlName]="'code'">
                         </mat-form-field>
                         <mat-form-field class="w-100" appearance="outline">
-                            <mat-label>نسبة الخصم</mat-label>
+                            <mat-label>خصم</mat-label>
                             <input matInput type="text" [formControlName]="'discount'">
                         </mat-form-field>
-                        <mat-form-field class="w-100" appearance="outline">
+
+
+                        <div class="form-group">
+                            <label for="">نوع الكوبون</label>
+                            <ng-multiselect-dropdown [settings]="voucherSettings" [data]="voucherList" [formControlName]="'type'"
+                                (onSelect)="onSelectShop($event)" (onSelectAll)="onSelectAllShops($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <!-- <mat-form-field class="w-100" appearance="outline">
                             <mat-label>نوع الكوبون</mat-label>
                             <input matInput type="text" [formControlName]="'type'">
-                        </mat-form-field>
+                        </mat-form-field> -->
+
+
+
                         <mat-form-field class="w-100" appearance="outline">
                             <mat-label>بداية سعر للكوبون</mat-label>
                             <input matInput type="text" [formControlName]="'min_order'">

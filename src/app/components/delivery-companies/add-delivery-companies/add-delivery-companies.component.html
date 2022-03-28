@@ -21,7 +21,7 @@
                             <input matInput type="text" [formControlName]="'confirm_password'">
                         </mat-form-field>
                         <div class="form-group">
-                            <label for="">صورة المتجر</label>
+                            <label for="">صورة الشركة</label>
                             <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif" [multiple]="false">
                                 <ngx-dropzone-label>أضغط هنا لإختيار صورة للمتجر</ngx-dropzone-label>
                                 <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" [file]="f" >
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group text-center mt-5">
                             <button class="btn btn-primary" type="submit" 
-                            [disabled]="AddCompanyForm.invalid || files.length < 1">أضافة متجر</button>
+                            [disabled]="AddCompanyForm.invalid || files.length < 1">أضافة شركة</button>
                         </div>
                     </form>
                 </div>
