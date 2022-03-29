@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
+import { ParcelDetailsComponent } from './../parcel-details/parcel-details.component';
+
 @Component({
   selector: 'app-list-parcels',
   templateUrl: './list-parcels.component.html',
@@ -25,6 +27,14 @@ export class ListParcelsComponent implements OnInit {
       this.spinner.hide();
       this.parcelsArr = parcelsRes['data'].slice().sort( (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
       console.log('parcelsArr', this.parcelsArr);
+    });
+  }
+
+  parcelDetails(orderDetails) {
+    let dialogRef = this.dialog.open( ParcelDetailsComponent, {
+      data: orderDetails,
+      height: '600px',
+      width: '600px',
     });
   }
 }

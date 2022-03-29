@@ -1,6 +1,14 @@
 <div class="container-fluid">
     <div class="row project-cards">
       <div class="col-md-12 project-list">
+        <form [formGroup]="searchForm" (ngSubmit)="onSelectOrderByID()">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>أدخل رقم الطلب</mat-label>
+            <input matInput type="number" [formControlName]="'order_id'">
+        </mat-form-field>
+          <button type="submit" class="btn btn-primary" [disabled]="searchForm.invalid">بحث</button>
+        </form>
+        <hr>
         <div class="card">
           <div class="row">
             <div class="col-md-12">
@@ -34,6 +42,7 @@
                       <th scope="col">رقم الطلب</th>
                       <th scope="col">وصف الطلب</th>
                       <th scope="col">السعر الكلي</th>
+                      <th scope="col">الإعدادات</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -42,9 +51,10 @@
                         <td>{{ order?.description }}</td>
                         <td>{{ order?.total_price }}</td>
                         <td>
+                          <i class="fas fa-eye text-success" style="cursor: pointer;" (click)="orderDetails(order)"></i> 
                           <!-- <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="deleteApp(product.id)"></i>
                           | -->
-                          <!-- <i class="fas fa-eye text-success" style="cursor: pointer;" (click)="orderDetails(order)"></i> 
+                          <!-- 
                           <span *ngIf="orderType == 'new' || order?.shipment_step_id == 2">|</span>
                           <button *ngIf="orderType == 'new'" class="btn-danger" (click)="onUpdateOrder(order.id, 7, order.status_id)">reject</button> 
                           <span *ngIf="orderType == 'new'">|</span>

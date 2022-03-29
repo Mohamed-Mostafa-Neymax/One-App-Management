@@ -10,11 +10,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { SettingsOrdersParcelsRoutingModule } from './settings-orders-parcels-routing.module';
 import { ListOrdersComponent } from './list-orders/list-orders.component';
 import { ListParcelsComponent } from './list-parcels/list-parcels.component';
+import { OrdersDetailsComponent } from './orders-details/orders-details.component';
+import { ParcelDetailsComponent } from './parcel-details/parcel-details.component';
 
 
 
 @NgModule({
-    declarations: [ListOrdersComponent, ListParcelsComponent],
+    declarations: [ListOrdersComponent, ListParcelsComponent, OrdersDetailsComponent, ParcelDetailsComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
