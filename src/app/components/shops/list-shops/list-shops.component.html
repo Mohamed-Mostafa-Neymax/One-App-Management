@@ -1,3 +1,17 @@
+
+<div class="col-md-12 project-list">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
+          <li class="nav-item"><a (click)="onListShops(0)" [ngClass]="{'active': isActiveStatus == 0}" class="nav-link" href="javascript:void(0)" role="tab"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>غير فعالين</a></li>
+
+          <li class="nav-item"><a (click)="onListShops(1)" [ngClass]="{'active': isActiveStatus == 1}" class="nav-link" href="javascript:void(0)" role="tab"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>فعالين</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
     <div class="row project-cards">
       <div class="col-sm-12">
@@ -19,11 +33,14 @@
                       <td>{{shop.name_ar}}</td>
                       <td>{{shop.description_ar}}</td>
                         <td>
-                          <i class="fas fa-eye text-success" style="cursor: pointer;" (click)="onDetailShop(shop)"></i>
-                          |
+                          <i *ngIf="isActiveStatus == 0" class="fas fa-check text-success" style="cursor: pointer;"
+                          (click)="onChangeStatus(shop.id, 2)"></i>
+                          <i *ngIf="isActiveStatus == 1" class="fas fa-times text-danger" style="cursor: pointer;"
+                          (click)="onChangeStatus(shop.id, 3)"></i>
+                          &nbsp;<i class="fas fa-eye text-success" style="cursor: pointer;" (click)="onDetailShop(shop)"></i>
                           <!-- <i class="fas fa-edit text-info" style="cursor: pointer;" (click)="onEditFilter(filter)"></i>
                           | -->
-                          <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="onDeleteShop(shop.id)"></i>
+                          <!-- <i class="fas fa-trash-alt text-danger" style="cursor: pointer;" (click)="onDeleteShop(shop.id)"></i> -->
                         </td>
                     </tr>
                   </tbody>

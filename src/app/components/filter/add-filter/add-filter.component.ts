@@ -33,6 +33,7 @@ export class AddFilterComponent implements OnInit {
         'success'
       );
       this.dialog.closeAll();
+      this.AddFilterForm.reset();
     });
   }
 }

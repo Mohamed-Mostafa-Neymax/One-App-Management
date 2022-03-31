@@ -9,7 +9,8 @@
                     <tbody>
                         <tr>
                             <th scope="row">رسم التوصيل بالكيلومتر</th>
-                            <td>{{ deliveryFee['price_per_km'] }}</td>
+                            <td *ngIf="!addMode">{{ deliveryFee['price_per_km'] }}</td>
+                            <td *ngIf="addMode">{{'لا يوجد رسم توصيل'}}</td>
                         </tr>
                     </tbody>
                     </table>
@@ -28,7 +29,7 @@
                     <input matInput type="text" [formControlName]="'price_per_km'">
                 </mat-form-field>
                 <div class="form-group text-center mt-5">
-                    <button class="btn btn-primary" type="submit">تعديل رسم التوصيل</button>
+                    <button class="btn btn-primary" type="submit">{{ addMode ? 'أضافة رسم التوصيل' : 'تعديل رسم التوصيل'}}</button>
                 </div>
             </form>
             </div>

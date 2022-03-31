@@ -90,13 +90,13 @@ export class AddCityComponent implements OnInit {
     console.log(updated_cit_obj);
     this.spinner.show();
     this.globalService.addCity(updated_cit_obj).subscribe( res => {
-    this.spinner.hide();
-    Swal.fire(
+      this.spinner.hide();
+      Swal.fire(
         'نجاح',
         'تم إضافة المدينة بنجاح',
         'success'
-    )
-    console.log(res) ;
+      );
+      this.cityForm.reset();
     });
   }
 }

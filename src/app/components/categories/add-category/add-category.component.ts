@@ -76,7 +76,9 @@ export class AddCategoryComponent implements OnInit {
           'نجاح',
           'تم إضافة الفئة بنجاح',
           'success'
-      )
+      );
+      this.files.splice(0);
+      this.categoryForm.reset();
     });
   }
 }

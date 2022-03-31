@@ -32,7 +32,7 @@ export class ListOrdersComponent implements OnInit {
     this.globalService.listOrders(status_id).subscribe( ordersRes => {
       console.log('ordersRes', ordersRes);
       this.spinner.hide();
-      this.ordersArr = ordersRes['data'].slice().sort( (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());;
+      this.ordersArr = ordersRes['data'].slice().sort( (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     });
   }
 

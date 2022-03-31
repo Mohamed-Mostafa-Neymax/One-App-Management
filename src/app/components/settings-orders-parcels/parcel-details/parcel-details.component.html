@@ -6,7 +6,7 @@
                 <thead style="text-align: right;white-space: nowrap;"><h4>بيانات الطرد</h4></thead><br>
                 <tbody>
                     <tr>
-                        <th scope="row">الطرد الطلب</th>
+                        <th scope="row">رقم الطرد</th>
                         <td>{{ parcelDetailsObj?.id }}</td>
                     </tr>
                     <tr>
@@ -14,7 +14,7 @@
                         <td>{{ parcelDetailsObj?.payment_method }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">عنوان الطرد</th>
+                        <th scope="row">أسم الطرد</th>
                         <td>{{ parcelDetailsObj?.title }}</td>
                     </tr>
                     <tr>
@@ -24,6 +24,10 @@
                     <tr>
                         <th scope="row">تاريخ الطلب</th>
                         <td>{{ extractDate }}</td>
+                    </tr>
+                    <tr>
+                        <th>صور الطرد</th>
+                        <td></td>
                     </tr>
                     <!-- <tr>
                         <th scope="row">سعر سلة الطلب</th>
@@ -61,20 +65,56 @@
             </table>
 
             <div class="row">
-                <p>صور الطرد</p>
                 <div class="col-md-3" *ngFor="let image of parcelDetailsObj?.parcel_images">
                     <img class="w-100" [src]="image?.image" alt="">
                 </div>
             </div>
-
+            <p>خط سير الطرد (From black point to red point)</p>
+            <div id="map2Id" style="height: 300px;width: 100%;"></div>
+            <br>
             <table class="table" dir="rtl">
                <thead style="text-align: right;"><h4>بيانات الشحن</h4></thead>
                <tbody>
-                   <!-- <tr>
-                       <th scope="row">مدة الشحن</th>
-                       <td>{{ parcelDetailsObj?.shop?.delivery_period }}</td>
-                   </tr>
-                   <tr>
+                    <tr>
+                        <th scope="row">أسم البنك</th>
+                        <td>{{ parcelDetailsObj?.delivery?.bank_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">أسم المدينة باللغة العربية</th>
+                        <td>{{ parcelDetailsObj?.delivery?.city?.name_ar }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">أسم المدينة باللغة الأنجليزية</th>
+                        <td>{{ parcelDetailsObj?.delivery?.city?.name_en }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">أسم الدولة باللغة العربية</th>
+                        <td>{{ parcelDetailsObj?.delivery?.country?.name_ar }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">أسم الدولة باللغة الأنجليزية</th>
+                        <td>{{ parcelDetailsObj?.delivery?.country?.name_en }}</td>
+                    </tr>
+
+
+                    <tr>
+                        <th scope="row">أسم السائق</th>
+                        <td>{{ parcelDetailsObj?.delivery?.user?.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">رقم رخصة السائق</th>
+                        <td>{{ parcelDetailsObj?.delivery?.driver_license_number }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">الأيميل الشخصي</th>
+                        <td>{{ parcelDetailsObj?.delivery?.user?.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">رقم الهاتف</th>
+                        <td>{{ parcelDetailsObj?.delivery?.user?.phone }}</td>
+                    </tr>
+
+                   <!--<tr>
                        <th scope="row">رسم التوصيل بالكيلومتر</th>
                        <td>{{ parcelDetailsObj?.shop?.delivery_fee_per_km }}</td>
                    </tr> -->

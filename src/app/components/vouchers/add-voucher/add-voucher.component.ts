@@ -71,6 +71,7 @@ export class AddVoucherComponent implements OnInit {
         'success'
       );
       this.dialog.closeAll();
+      this.addVoucherForm.reset();
     });
   }
 

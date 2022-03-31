@@ -14,15 +14,20 @@ import { DetailShopComponent } from './../detail-shop/detail-shop.component';
 export class ListShopsComponent implements OnInit {
   
   shopsArr;
+  isActiveStatus = 0;
 
   constructor( private globalService: GlobalService, private spinner:NgxSpinnerService, private dialog:MatDialog) { }
   ngOnInit(): void {
-    this.onListShops();
+    this.onListShops(this.isActiveStatus);
   }
 
 
-  onListShops(){
-    this.globalService.listShops().subscribe( shopsRes => this.shopsArr = shopsRes['data'] );
+  onListShops(isActive: number){
+    this.isActiveStatus = isActive;
+    this.globalService.listShops().subscribe( shopsRes => {
+      console.log(shopsRes['data']);
+      this.shopsArr = shopsRes['data'].filter( shop => shop?.is_active == isActive );
+    } );
   }
 
   onDetailShop(shop) {
@@ -42,7 +47,19 @@ export class ListShopsComponent implements OnInit {
         'تم حذف المتجر بنجاح',
         'success'
       )
-      this.onListShops();
+      this.onListShops(this.isActiveStatus);
     })
+  }
+
+  onChangeStatus(shop_id, status_id) {
+    this.spinner.show();
+    this.globalService.manageUsers(shop_id, status_id).subscribe( updateUserRes => {
+      this.spinner.hide();
+      Swal.fire(
+        'نجاح',
+        'تم تعديل حالة المتجر بنجاح',
+        'success'
+      );
+    });
   }
 }

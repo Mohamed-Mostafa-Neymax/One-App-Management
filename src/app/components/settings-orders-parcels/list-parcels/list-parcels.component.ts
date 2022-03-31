@@ -1,4 +1,5 @@
 import { GlobalService } from 'src/app/services/global.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,10 +15,14 @@ import { ParcelDetailsComponent } from './../parcel-details/parcel-details.compo
 export class ListParcelsComponent implements OnInit {
   parcelsArr = [];
   orderType: string;
+  searchForm: FormGroup;
 
   constructor(private globalService: GlobalService, private dialog:MatDialog, private spinner:NgxSpinnerService) { }
   ngOnInit(): void {
     this.onFilterOrders(0, 'created');
+    this.searchForm = new FormGroup({
+      'order_id': new FormControl(null, Validators.required)
+    });
   }
   onFilterOrders(shipment_step_id: number, status_name: string) {
     this.orderType = status_name;
@@ -31,6 +36,16 @@ export class ListParcelsComponent implements OnInit {
   }
 
   parcelDetails(orderDetails) {
+    let dialogRef = this.dialog.open( ParcelDetailsComponent, {
+      data: orderDetails,
+      height: '600px',
+      width: '600px',
+    });
+  }
+
+  onSelectOrderByID() {
+    let orderDetails = this.parcelsArr.find( singleParcel => singleParcel['id'] == this.searchForm.value.order_id );
+    console.log(orderDetails);
     let dialogRef = this.dialog.open( ParcelDetailsComponent, {
       data: orderDetails,
       height: '600px',

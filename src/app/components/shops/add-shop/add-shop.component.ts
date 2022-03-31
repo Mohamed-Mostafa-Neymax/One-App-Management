@@ -157,6 +157,9 @@ export class AddShopComponent implements OnInit {
         'success'
       );
       this.dialog.closeAll();
+      this.files.splice(0);
+      this.files_2.splice(0);
+      this.AddShopForm.reset();
     });
   }
 

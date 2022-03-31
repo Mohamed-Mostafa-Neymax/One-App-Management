@@ -23,13 +23,13 @@ export class AddCountryComponent implements OnInit {
   onSubmit(){
     this.spinner.show();
     this.globalService.addCountry(this.countryForm.value).subscribe( res => {
-    this.spinner.hide();
-    Swal.fire(
-        'نجاح',
-        'تم إضافة الدولة بنجاح',
-        'success'
-    )
-  
+      this.spinner.hide();
+      Swal.fire(
+          'نجاح',
+          'تم إضافة الدولة بنجاح',
+          'success'
+      );
+      this.countryForm.reset();
     });
    
   }

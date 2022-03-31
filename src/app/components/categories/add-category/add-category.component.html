@@ -44,7 +44,7 @@
                         </div>
                         
                         <div class="form-group text-center mt-5">
-                            <button class="btn btn-primary" type="submit">إضافة الفئة</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="categoryForm.invalid || files.length < 1">إضافة الفئة</button>
                         </div>
                     </form>
                 </div>

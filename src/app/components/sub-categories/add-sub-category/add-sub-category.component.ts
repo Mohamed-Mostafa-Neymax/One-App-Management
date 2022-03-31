@@ -111,7 +111,9 @@ export class AddSubCategoryComponent implements OnInit {
         'نجاح',
         'تم إضافة الفئة الفرعية بنجاح',
         'success'
-      )
-    })
+      );
+      this.files.splice(0);
+      this.subCategoryForm.reset();
+    });
   }
 }
